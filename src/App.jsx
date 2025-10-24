@@ -22,6 +22,21 @@ export default function App() {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
+  // set browser tab title and favicon (place your image at /assets/tab-icon.png)
+  useEffect(() => {
+    document.title = "Alex Joaquim Pereira";
+
+    const faviconPath = "/src/assets/react.png"; 
+    let link = document.querySelector("link[rel~='icon']");
+    if (!link) {
+      link = document.createElement("link");
+      link.rel = "icon";
+      document.head.appendChild(link);
+    }
+    link.type = "image/png";
+    link.href = faviconPath;
+  }, []);
+
   return (
     <div className="wrap">
       <Header theme={theme} setTheme={setTheme} />
