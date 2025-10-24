@@ -1,8 +1,8 @@
 export const siteData = {
   name: "Alex Joaquim Pereira",
-  role: "Frontend Engineer & UI Enthusiast",
-  email: "alex@example.com",
-  resumeUrl: "#",
+  role: "Computer Engineering Student",
+  email: "alexpereira1781@gmail.com",
+  resumeUrl: "https://www.canva.com/design/DAGgRbG5r3o/v1TpgL3DjNWYawsVF0B8Yg/view?utm_content=DAGgRbG5r3o&utm_campaign=designshare&utm_medium=link&utm_source=viewer", // updated: put your Canva share URL here
   heroTitle: "Crafting beautiful, performant web experiences.",
   heroSub:
     "I build modern front-end applications with a focus on usable interfaces, animations, and clean code. I enjoy turning ideas into delightful, accessible products.",
