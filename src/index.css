@@ -446,24 +446,28 @@
 .github-grid {
   display: flex;
   justify-content: center;
-  flex-wrap: nowrap; /* keep them side-by-side */
+  flex-wrap: nowrap; /* keep them side-by-side on wide screens */
   gap: 24px;
-  align-items: center;
+  align-items: flex-start; /* let images size naturally from top */
 }
 
+/* Make each card size itself to the image (so width grows with height) */
 .stat-card {
-  flex: 0 1 auto;
+  flex: 0 0 auto; /* do not grow/shrink — image intrinsic width will be used */
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 0;
 }
 
-/* ensure both images use the same height and keep aspect ratio */
+/* image keeps same height; allow natural width (remove max-width cap) */
 .github-grid img {
   height: 400px; /* same height for both images */
   width: auto;
-  max-width: 100%;
+  max-width: none; /* allow width to grow proportionally */
+  max-height: 400px;
   object-fit: contain;
+  display: block;
   border-radius: 8px;
   box-shadow: 0 2px 8px var(--card-shadow);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -474,14 +478,18 @@
   box-shadow: 0 4px 12px var(--card-shadow-hover);
 }
 
-/* responsive fallback: stack on small screens */
+/* responsive fallback: stack and constrain on small screens */
 @media (max-width: 720px) {
   .github-grid {
     flex-wrap: wrap;
   }
+  .stat-card {
+    flex: 1 1 100%;
+  }
   .github-grid img {
     width: 100%;
     height: auto;
+    max-width: 100%;
   }
 }
 
