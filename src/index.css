@@ -446,14 +446,25 @@
 .github-grid {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* keep them side-by-side */
   gap: 24px;
+  align-items: center;
 }
 
+.stat-card {
+  flex: 0 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ensure both images use the same height and keep aspect ratio */
 .github-grid img {
-  border-radius: 8px;
+  height: 220px; /* same height for both images */
+  width: auto;
   max-width: 100%;
-  width: 420px;
+  object-fit: contain;
+  border-radius: 8px;
   box-shadow: 0 2px 8px var(--card-shadow);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -463,6 +474,16 @@
   box-shadow: 0 4px 12px var(--card-shadow-hover);
 }
 
+/* responsive fallback: stack on small screens */
+@media (max-width: 720px) {
+  .github-grid {
+    flex-wrap: wrap;
+  }
+  .github-grid img {
+    width: 100%;
+    height: auto;
+  }
+}
 
 /* contact */
  form {
