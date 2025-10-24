@@ -8,8 +8,11 @@ export default function Hero({ data }) {
         <a href={data.resumeUrl} className="btn">
           📄 Resume
         </a>
-        <a href="#contact" className="ghost">
+        <a href={data.email} className="ghost">
           ✉️ Contact
+        </a>
+        <a href={data.linkedinUrl} className="ghost">
+          🔗 LinkedIn
         </a>
       </div>
     </section>
