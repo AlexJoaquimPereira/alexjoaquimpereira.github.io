@@ -462,7 +462,7 @@
 
 /* image keeps same height; allow natural width (remove max-width cap) */
 .github-grid img {
-  height: 400px; /* same height for both images */
+  height: 300px; /* same height for both images */
   width: auto;
   max-width: none; /* allow width to grow proportionally */
   max-height: 400px;
