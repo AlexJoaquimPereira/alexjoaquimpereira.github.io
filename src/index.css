@@ -460,7 +460,7 @@
 
 /* ensure both images use the same height and keep aspect ratio */
 .github-grid img {
-  height: 220px; /* same height for both images */
+  height: 400px; /* same height for both images */
   width: auto;
   max-width: 100%;
   object-fit: contain;
