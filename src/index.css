@@ -446,26 +446,30 @@
 .github-grid {
   display: flex;
   justify-content: center;
-  flex-wrap: nowrap; /* keep them side-by-side on wide screens */
+  flex-wrap: nowrap; /* keep side-by-side on wide screens */
   gap: 24px;
   align-items: flex-start; /* let images size naturally from top */
+  max-width: 100%; /* don't let the grid exceed its container */
+  box-sizing: border-box;
 }
 
 /* Make each card size itself to the image (so width grows with height) */
 .stat-card {
-  flex: 0 0 auto; /* do not grow/shrink — image intrinsic width will be used */
+  flex: 1 1 0;   /* allow shrinking and sharing available space */
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 0;
+  min-width: 0;  /* important for flex children to be able to shrink */
+  max-width: 100%;
 }
 
-/* image keeps same height; allow natural width (remove max-width cap) */
+/* fixed visual height but prevent each image from growing past available viewport/container */
 .github-grid img {
-  height: 300px; /* same height for both images */
+  /* responsive, readable height without overflow */
+  height: clamp(220px, 28vw, 360px);
   width: auto;
-  max-width: none; /* allow width to grow proportionally */
-  max-height: 400px;
+  max-width: min(100%, calc((100vw - 96px) / 2)); /* keep two cards side-by-side without pushing page wider */
+  max-height: 420px;
   object-fit: contain;
   display: block;
   border-radius: 8px;
