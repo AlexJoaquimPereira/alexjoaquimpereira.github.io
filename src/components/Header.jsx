@@ -2,10 +2,10 @@ export default function Header({ theme, setTheme }) {
   return (
     <header>
       <div className="brand">
-        <div className="logo">AJ</div>
+        <div className="logo">AJP</div>
         <div>
           <h1>Alex Joaquim Pereira</h1>
-          <small className="muted">Frontend Engineer & UI Enthusiast</small>
+          <small className="muted">Computer Engineering Student</small>
         </div>
       </div>
       <nav>

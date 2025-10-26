@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import "./index.css";
-import { siteData } from "./data/siteData";
-import Header from "./components/Header";
-import Hero from "./components/Hero";
-import Skills from "./components/Skills";
-import Projects from "./components/Projects";
-import GithubStats from "./components/GithubStats";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
+import { siteData } from "/src/data/siteData";
+import Header from "/src/components/Header";
+import Hero from "/src/components/Hero";
+import Skills from "/src/components/Skills";
+import Projects from "/src/components/Projects";
+import GithubStats from "/src/components/GithubStats";
+import Contact from "/src/components/Contact";
+import Footer from "/src/components/Footer";
 
 export default function App() {
   const [theme, setTheme] = useState(
@@ -40,7 +41,13 @@ export default function App() {
   return (
     <div className="wrap">
       <Header theme={theme} setTheme={setTheme} />
-      <main>
+
+      <motion.main
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
+      >
         <section>
           <Hero data={siteData} />
           <Projects data={siteData} />
@@ -50,7 +57,8 @@ export default function App() {
         <aside>
           <Skills skills={siteData.skills} />
         </aside>
-      </main>
+      </motion.main>
+
       <Footer name={siteData.name} />
     </div>
   );

@@ -82,6 +82,130 @@
    margin: 0 auto;
  }
 
+ /* ===========================
+   Nav transitions & micro-interactions
+   Apply a subtle lift, color-fade, and underline animation
+=========================== */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 12px;
+  background: transparent;
+  border-radius: 10px;
+  transition: background 240ms ease, box-shadow 240ms ease, transform 200ms ease, backdrop-filter 240ms ease;
+  will-change: background, box-shadow, transform;
+}
+
+/* nav when scrolled / elevated (toggle this class from Header on scroll) */
+nav.nav--scrolled {
+  background: color-mix(in srgb, var(--card-bg) 86%, transparent); /* subtle tint */
+  box-shadow: 0 8px 24px rgba(2,6,23,0.06);
+  transform: translateY(-1px);
+  backdrop-filter: blur(6px) saturate(110%);
+}
+
+/* nav brand / logo */
+nav .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: transform 180ms ease;
+}
+nav .brand img {
+  height: 32px;
+  width: 32px;
+  object-fit: contain;
+  border-radius: 6px;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+/* nav links */
+nav a,
+nav .nav-link {
+  color: var(--text);
+  text-decoration: none;
+  padding: 8px 10px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 180ms ease, background 180ms ease, transform 140ms cubic-bezier(.2,.9,.3,1), opacity 160ms ease;
+  position: relative;
+}
+
+/* subtle underline animation using pseudo-element */
+nav a::after,
+nav .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 6px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2, var(--accent)));
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 220ms cubic-bezier(.2,.9,.3,1), opacity 180ms ease;
+  opacity: 0;
+}
+
+/* hover / focus states */
+nav a:hover,
+nav .nav-link:hover,
+nav a:focus,
+nav .nav-link:focus {
+  color: var(--accent);
+  transform: translateY(-3px);
+}
+nav a:hover::after,
+nav .nav-link:hover::after,
+nav a:focus::after,
+nav .nav-link:focus::after {
+  transform: scaleX(1);
+  opacity: 1;
+}
+
+/* active / selected item */
+nav a.active,
+nav .nav-link.active {
+  color: var(--accent);
+}
+nav a.active::after,
+nav .nav-link.active::after {
+  transform: scaleX(1);
+  opacity: 1;
+}
+
+/* subtle press feedback */
+nav a:active,
+nav .nav-link:active {
+  transform: translateY(-1px) scale(0.997);
+}
+
+/* responsive adjustments for compact nav */
+@media (max-width: 720px) {
+  nav {
+    padding: 8px;
+  }
+  nav .brand img { height: 28px; width: 28px; }
+  nav a, nav .nav-link { padding: 6px 8px; }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  nav,
+  nav a,
+  nav .brand,
+  nav .brand img,
+  nav a::after {
+    transition: none !important;
+    animation: none !important;
+  }
+ }
+
  /* NAV */
  header {
    display: flex;
@@ -497,39 +621,98 @@
   }
 }
 
-/* contact */
- form {
-   display: grid;
-   gap: 12px
- }
+/* Contact form — improved inputs and smaller tactile button */
+#contact {
+  /* ensure contact section uses same card background if desired */
+  color: var(--text);
+  padding-bottom: 64px; /* space between contact content and page footer */
+  box-sizing: border-box;
+}
 
- input,
- textarea {
-   width: 100%;
-   padding: 12px;
-   border-radius: 10px;
-   background: transparent;
-   border: 1px solid rgba(255, 255, 255, 0.06);
-   color: inherit;
-   font-size: 14px;
- }
+#contact .contact-form {
+  display: grid;
+  gap: 12px;
+  align-items: start; /* allow button to size to content */
+}
 
- textarea {
-   min-height: 120px;
-   resize: vertical
- }
+/* Text fields — explicit border + background using theme variables to avoid invisible borders in bright mode */
+#contact input,
+#contact textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card-bg);
+  color: var(--text);
+  box-sizing: border-box;
+  transition: border-color 0.14s ease, box-shadow 0.14s ease, transform 0.06s ease;
+  font-size: 0.98rem;
+  outline: none;
+}
 
- .footer {
-   margin-top: 22px;
-   color: var(--muted);
-   font-size: 13px;
-   display: flex;
-   justify-content: space-between;
-   flex-wrap: wrap;
-   gap: 10px;
- }
+/* ensure placeholders are readable */
+#contact input::placeholder,
+#contact textarea::placeholder {
+  color: var(--muted);
+  opacity: 0.9;
+}
 
- /* reveal animation */
+/* textarea sizing */
+#contact textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Focus state: highlight using a subtle ring */
+#contact input:focus,
+#contact textarea:focus {
+  border-color: var(--accent);
+  /* subtle focus ring - uses reasonable fallback rgba for the accent */
+  box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.06);
+}
+
+/* Smaller, tactile submit button */
+#contact .btn.btn-sm {
+  padding: 8px 12px 8px 14px;
+  font-size: 0.92rem;
+  border-radius: 8px;
+  box-shadow: 0 8px 18px rgba(16, 24, 40, 0.06);
+  transition: transform 0.09s cubic-bezier(.2,.9,.3,1), box-shadow 0.12s ease;
+  margin-bottom: 8px; /* small gap below the button for extra safety */
+  width: auto;           /* shrink to fit text */
+  white-space: nowrap;   /* keep label on one line */
+  justify-self: start;   /* align to start of the grid cell */
+  align-self: start;
+}
+
+/* Tactile press feedback */
+#contact .btn.btn-sm:active {
+  transform: translateY(1px) scale(0.995);
+  box-shadow: 0 4px 10px rgba(16, 24, 40, 0.04);
+}
+
+/* Focus style for keyboard users */
+#contact .btn.btn-sm:focus {
+  outline: none;
+  box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.08);
+}
+
+/* disabled state */
+#contact .btn[disabled] {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Dark-theme tweaks (use existing vars) */
+:root[data-theme='dark'] #contact input,
+:root[data-theme='dark'] #contact textarea {
+  background: var(--card); /* darker card color */
+  border: 1px solid var(--border);
+}
+
+/* reveal animation */
  .reveal {
    opacity: 0;
    transform: translateY(12px);
@@ -574,3 +757,138 @@
  .right {
    margin-left: auto
  }
+
+ .success-msg {
+  color: var(--accent);
+  margin-top: 12px;
+  font-weight: 500;
+}
+
+.error-msg {
+  color: #e63946;
+  margin-top: 12px;
+  font-weight: 500;
+}
+
+/* ===========================
+   🌙 Modern Footer Styling
+=========================== */
+.footer {
+  width: 100%;
+  padding: 48px 20px 32px;
+  background: linear-gradient(
+    180deg,
+    var(--card-bg) 0%,
+    var(--bg) 100%
+  );
+  color: var(--text);
+  text-align: center;
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -2px 8px var(--card-shadow);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.footer-content {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.footer-logo {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.footer-tagline {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.footer-socials a {
+  font-size: 1.4rem;
+  color: var(--muted);
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.footer-socials a:hover {
+  color: var(--accent);
+  transform: translateY(-3px) scale(1.1);
+}
+
+.footer-copy {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 12px;
+  opacity: 0.8;
+}
+
+/* 🌞 Light mode adjustments */
+:root[data-theme='light'] .footer {
+  background: linear-gradient(
+    180deg,
+    #f9f9f9 0%,
+    #ffffff 100%
+  );
+  border-top: 1px solid #e5e5e5;
+}
+
+/* 🌚 Dark mode adjustments */
+:root[data-theme='dark'] .footer {
+  background: linear-gradient(
+    180deg,
+    #111418 0%,
+    #0c0f13 100%
+  );
+  border-top: 1px solid #1f242c;
+}
+
+/* Make the footer full-bleed (take entire page breadth) while keeping inner content centered */
+footer {
+  /* reset the rounded card look so footer is a full-width bar */
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100vw;
+  border-radius: 0;
+  box-sizing: border-box;
+
+  /* styling that matches the theme variables */
+  background: var(--card-bg);
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -2px 12px var(--card-shadow);
+  padding: 20px 24px;
+}
+
+/* keep footer inner content constrained to the site's max width */
+.footer-content,
+footer > .wrap-inner {
+  max-width: var(--maxw, 1100px);
+  margin: 0 auto;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+/* small tweak for light/dark consistency already driven by vars:
+   if you want a slightly different tint, adjust opacity on the box-shadow or the background here */
+:root[data-theme='light'] footer {
+  background: var(--card-bg);
+}
+:root[data-theme='dark'] footer {
+  background: var(--card-bg);
+}

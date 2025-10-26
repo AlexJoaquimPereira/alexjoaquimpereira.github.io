@@ -1,31 +1,56 @@
-export default function Contact({ data }) {
-  const handleSubmit = (e) => {
+import { useState } from "react";
+
+export default function Contact() {
+  const [status, setStatus] = useState("idle");
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const name = e.target.name.value.trim();
-    const email = e.target.email.value.trim();
-    const subject = e.target.subject.value.trim();
-    const message = e.target.message.value.trim();
-    if (!name || !email || !message) return alert("Please complete the form.");
-    const mailto = `mailto:${data.email}?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(
-      `Hi, I'm ${name}.\n\n${message}\n\n(Reply to: ${email})`
-    )}`;
-    window.location.href = mailto;
+    setStatus("loading");
+
+    const formData = new FormData(e.target);
+
+    try {
+      const res = await fetch("https://formspree.io/f/mqagapka", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: formData,
+      });
+
+      if (res.ok) {
+        setStatus("success");
+        e.target.reset();
+      } else throw new Error("Form submission failed");
+    } catch (err) {
+      console.error(err);
+      setStatus("error");
+    }
   };
 
   return (
     <section id="contact">
       <div className="card-title">Contact</div>
-      <form onSubmit={handleSubmit}>
+
+      <form className="contact-form" onSubmit={handleSubmit}>
         <input name="name" placeholder="Your name" required />
         <input name="email" type="email" placeholder="Your email" required />
         <input name="subject" placeholder="Subject" required />
         <textarea name="message" placeholder="Message" required />
-        <button type="submit" className="btn">
-          Send message
+        <button
+          type="submit"
+          className="btn btn-sm"
+          disabled={status === "loading"}
+          aria-busy={status === "loading"}
+        >
+          {status === "loading" ? "Sending..." : "Send message"}
         </button>
       </form>
+
+      {status === "success" && (
+        <p className="success-msg">✅ Message sent successfully!</p>
+      )}
+      {status === "error" && (
+        <p className="error-msg">❌ Oops, something went wrong. Try again!</p>
+      )}
     </section>
   );
 }
