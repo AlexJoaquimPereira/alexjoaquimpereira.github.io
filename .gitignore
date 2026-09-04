@@ -1,3 +1,10 @@
+# Jekyll
+_site/
+.jekyll-cache/
+.jekyll-metadata
+vendor/
+bundle/
+
 # Local editor/tooling artifacts
 .telemetry/
 
