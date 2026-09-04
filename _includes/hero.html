@@ -2,14 +2,15 @@
 <section class="hero" id="top">
   <div class="container hero-inner">
 
-    <!-- Photo first in DOM: appears first on mobile; desktop grid places it on the right -->
+    <!-- Photo first in DOM: appears first on mobile; desktop grid places it on the right.
+         If assets/images/profile.jpg is missing, an empty framed slot renders instead. -->
     <figure class="hero-media" data-load>
       {% if person.image %}
         {% assign hero_photo = site.static_files | where_exp: "f", "f.path == person.image" | first %}
         {% if hero_photo %}
           <img class="hero-photo" src="{{ person.image | relative_url }}" alt="{{ person.image_alt }}" width="480" height="600" />
         {% else %}
-          <div class="placeholder hero-photo-slot" role="img" aria-label="Placeholder for {{ person.name }}'s profile photo">[PLACEHOLDER: PROFILE PHOTO]</div>
+          <div class="hero-photo-slot" aria-hidden="true"></div>
         {% endif %}
       {% endif %}
     </figure>
