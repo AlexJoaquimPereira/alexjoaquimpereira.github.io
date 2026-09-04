@@ -1,0 +1,7 @@
+{% comment %}
+  Estimated reading time: word count / 200, rounded up, minimum 1.
+{% endcomment %}
+{% assign words = include.content | strip_html | split: " " | size %}
+{% assign minutes = words | divided_by: 200.0 | ceil %}
+{% if minutes < 1 %}{% assign minutes = 1 %}{% endif %}
+<span>{{ minutes }} min read</span>
