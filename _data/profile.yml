@@ -8,8 +8,8 @@ name: "Alex Joaquim Pereira"
 initials: "AP"
 
 # --- Profile photo -------------------------------------------
-# Put your photo at assets/images/profile.jpg and it will appear
-# automatically (portrait orientation, ~4:5, works best).
+# assets/images/profile.jpg — portrait orientation, ~4:5 looks best.
+# If the file is missing the hero renders an empty framed slot.
 image: "/assets/images/profile.jpg"
 image_alt: "Portrait of Alex Joaquim Pereira"
 
@@ -109,10 +109,25 @@ contact:
   # To show your email address publicly, uncomment:
   # email: "[EMAIL]"
 
-# --- GitHub stats section ---------------------------------------
+# --- GitHub activity section ------------------------------------
 github:
   username: "AlexJoaquimPereira"
-  # One stats card and one top-languages card, rendered transparent and
+  # Two cards from github-readme-stats, rendered transparent and
   # color-matched to the site theme (light/dark variants swapped by JS).
+  # top_langs uses card_width=467 & langs_count=6 so both cards share the
+  # same visual scale (stats: 467x195, langs: 467x215).
   stats_url: "https://github-readme-stats-vercel-seven.vercel.app/api?username=AlexJoaquimPereira&show_icons=true&rank_icon=github&hide_rank=false&hide_border=true&bg_color=00000000"
-  top_langs_url: "https://github-readme-stats-vercel-seven.vercel.app/api/top-langs?username=AlexJoaquimPereira&locale=en&layout=compact&langs_count=8&size_weight=0.5&count_weight=0.5&hide_border=true&bg_color=00000000&exclude_repo=github-readme-stats-vercel"
+  top_langs_url: "https://github-readme-stats-vercel-seven.vercel.app/api/top-langs?username=AlexJoaquimPereira&locale=en&layout=compact&langs_count=6&card_width=467&size_weight=0.5&count_weight=0.5&hide_border=true&bg_color=00000000&exclude_repo=github-readme-stats-vercel"
+
+# --- Substack (FUTURE — DO NOT enable until it exists) -----------
+# To activate later:
+#   1. Create your Substack, then replace the URL below.
+#   2. Set enabled: true.
+#   3. Tag the posts that should also appear on Substack with `tech`
+#      (or change shared_tag to whatever tag you prefer).
+# While disabled, nothing Substack-related is rendered anywhere.
+# substack:
+#   enabled: true
+#   url: "https://YOUR-SUBSTACK-NAME.substack.com/"
+#   shared_tag: "tech"
+#   label: "Also on Substack"
