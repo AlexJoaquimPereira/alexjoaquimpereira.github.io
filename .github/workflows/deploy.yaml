@@ -22,10 +22,14 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.2"
-          bundler-cache: true
+
+      # Bundler is intentionally not used: install the same Jekyll version
+      # that the site is developed and tested with.
+      - name: Install Jekyll
+        run: gem install jekyll -v 4.4.1 --no-document
 
       - name: Build site
-        run: bundle exec jekyll build
+        run: jekyll build
         env:
           JEKYLL_ENV: production
 
