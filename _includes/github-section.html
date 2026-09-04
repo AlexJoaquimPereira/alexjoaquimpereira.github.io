@@ -3,18 +3,18 @@
 <section class="section" id="github" aria-labelledby="github-title">
   <div class="container">
     {% capture gh_desc %}A small snapshot of what I've been working on lately, straight from my [GitHub profile]({{ person.social.github.url }}).{% endcapture %}
-    {% include section-head.html num="05" eyebrow="GitHub" title="Activity snapshot" desc=gh_desc %}
+    {% include section-head.html num="03" eyebrow="GitHub" title="GitHub activity" desc=gh_desc %}
 
     <div class="github-grid" data-reveal-group>
       {% include github-card.html
          url=gh.stats_url
          alt="GitHub statistics card for AlexJoaquimPereira: stars, commits, pull requests and rank"
-         width="495" height="195" %}
+         width="467" height="195" %}
 
       {% include github-card.html
          url=gh.top_langs_url
          alt="Most used languages across AlexJoaquimPereira's public repositories"
-         width="495" height="200" %}
+         width="467" height="215" %}
     </div>
 
     <p class="after-list" data-reveal>
