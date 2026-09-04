@@ -35,8 +35,8 @@
   <meta property="og:image" content="https://alexjoaquimpereira.github.io/assets/images/og-image.png" />
   -->
 
-  <meta name="theme-color" content="#fafaf8" media="(prefers-color-scheme: light)" />
-  <meta name="theme-color" content="#141419" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#FBF7F2" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#121014" media="(prefers-color-scheme: dark)" />
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
 
   <link rel="stylesheet" href="/css/style.css" />
@@ -93,7 +93,8 @@
 <section class="hero" id="top">
   <div class="container hero-inner">
 
-    <!-- Photo first in DOM: appears first on mobile; desktop grid places it on the right -->
+    <!-- Photo first in DOM: appears first on mobile; desktop grid places it on the right.
+         If assets/images/profile.jpg is missing, an empty framed slot renders instead. -->
     <figure class="hero-media" data-load>
       
         
@@ -190,56 +191,150 @@
 </section>
 
 
+
 <section class="section" id="projects" aria-labelledby="projects-title">
   <div class="container">
-    
     
     <div class="section-head" data-reveal>
   <span class="section-eyebrow"><span class="eyebrow-num" aria-hidden="true">02</span>Projects</span>
   
-  <h2>Things I'm building</h2>
+  <h2>Things I've built</h2>
   
-  <p>I have a few app and web based projects planned. Featured work will be listed here as it takes shape — in the meantime, my public code lives on <a href="https://github.com/AlexJoaquimPereira">GitHub</a>.</p>
+  <p>Course and personal work, straight from my <a href="https://github.com/AlexJoaquimPereira">GitHub</a>. Featured work will grow here as projects take shape.</p>
 </div>
 
 
     
     
-    <div class="project-grid" data-reveal-group>
       
-      <article class="card project-card" data-reveal>
-        <header>
-          <h3>Sample project — replace me</h3>
-          <span class="badge">Sample</span>
-        </header>
+      
 
+      
+      <article class="project-featured" data-reveal>
         
-
-        <p>This card is an example of the layout so you can see how featured work will look. Replace it with a real project: a short description, the technologies used, and links to the repository and live demo.</p>
-
+        <h3>OpenCode Agents</h3>
+        <p>OpenCode agents configured around DeepSeek V4 Flash 0731, GLM-5.3-Flash and GPT-5.6 Luna as backend models; chosen specifically to maximise programming tasks completed per dollar.</p>
         
         <ul class="project-tags">
-          <li>Python</li><li>JavaScript</li>
+          <li>JavaScript</li>
         </ul>
         
-
         
         <div class="project-links">
-          <a href="https://github.com/AlexJoaquimPereira" target="_blank" rel="noopener noreferrer">GitHub<span aria-hidden="true">↗</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+          <a href="https://github.com/AlexJoaquimPereira/opencode-agent-config" target="_blank" rel="noopener noreferrer">GitHub<span aria-hidden="true">↗</span><span class="visually-hidden"> (opens in a new tab)</span></a>
           
         </div>
         
       </article>
       
-    </div>
+
+      
+      <ul class="project-rows" data-reveal-group>
+        
+        <li class="project-row" data-reveal>
+          <div class="project-row-head">
+            <h4>FortiPrompt RedTeam</h4>
+            
+          </div>
+          <p>Automated adversarial prompt generation and synthetic dataset creation.</p>
+          
+          <div class="project-links">
+            <a href="https://github.com/AlexJoaquimPereira/FortiPrompt-redteam" target="_blank" rel="noopener noreferrer">GitHub<span aria-hidden="true">↗</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+            
+          </div>
+          
+        </li>
+        
+        <li class="project-row" data-reveal>
+          <div class="project-row-head">
+            <h4>FortiPrompt Evaluation System</h4>
+            
+          </div>
+          <p>A simplified red-team evaluation pipeline for LLMs.</p>
+          
+          <div class="project-links">
+            <a href="https://github.com/AlexJoaquimPereira/FortiPrompt-redteam-evaluator-v3" target="_blank" rel="noopener noreferrer">GitHub<span aria-hidden="true">↗</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+            
+          </div>
+          
+        </li>
+        
+        <li class="project-row" data-reveal>
+          <div class="project-row-head">
+            <h4>Social Media Application — Semester 5</h4>
+            
+            <ul class="project-tags">
+              <li>JavaScript</li>
+            </ul>
+            
+          </div>
+          <p>Our Database Management and Query Processing project in Semester 5.</p>
+          
+          <div class="project-links">
+            <a href="https://github.com/AlexJoaquimPereira/Database-Management-Query-Processing-Project-SEM5" target="_blank" rel="noopener noreferrer">GitHub<span aria-hidden="true">↗</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+            
+          </div>
+          
+        </li>
+        
+      </ul>
+      
     
+  </div>
+</section>
+
+
+
+<section class="section" id="github" aria-labelledby="github-title">
+  <div class="container">
+    
+    <div class="section-head" data-reveal>
+  <span class="section-eyebrow"><span class="eyebrow-num" aria-hidden="true">03</span>GitHub</span>
+  
+  <h2>GitHub activity</h2>
+  
+  <p>A small snapshot of what I’ve been working on lately, straight from my <a href="https://github.com/AlexJoaquimPereira">GitHub profile</a>.</p>
+</div>
+
+
+    <div class="github-grid" data-reveal-group>
+      
+
+<figure class="stat-card" data-stat
+        data-src-light="https://github-readme-stats-vercel-seven.vercel.app/api?username=AlexJoaquimPereira&show_icons=true&rank_icon=github&hide_rank=false&hide_border=true&bg_color=00000000&theme=transparent&title_color=24131F&text_color=665C62&icon_color=66023C"
+        data-src-dark="https://github-readme-stats-vercel-seven.vercel.app/api?username=AlexJoaquimPereira&show_icons=true&rank_icon=github&hide_rank=false&hide_border=true&bg_color=00000000&theme=transparent&title_color=F3EDF1&text_color=B8AAB4&icon_color=D06A9E">
+  <img src="https://github-readme-stats-vercel-seven.vercel.app/api?username=AlexJoaquimPereira&show_icons=true&rank_icon=github&hide_rank=false&hide_border=true&bg_color=00000000&theme=transparent&title_color=24131F&text_color=665C62&icon_color=66023C" alt="GitHub statistics card for AlexJoaquimPereira: stars, commits, pull requests and rank" width="467" height="195" loading="lazy" data-stat-img />
+  <figcaption class="stat-fallback" hidden>
+    <p>GitHub statistics are temporarily unavailable.</p>
+    <a class="more-link" href="https://github.com/AlexJoaquimPereira" target="_blank" rel="noopener noreferrer">View GitHub profile →<span class="visually-hidden"> (opens in a new tab)</span></a>
+  </figcaption>
+</figure>
+
+
+      
+
+<figure class="stat-card" data-stat
+        data-src-light="https://github-readme-stats-vercel-seven.vercel.app/api/top-langs?username=AlexJoaquimPereira&locale=en&layout=compact&langs_count=6&card_width=467&size_weight=0.5&count_weight=0.5&hide_border=true&bg_color=00000000&exclude_repo=github-readme-stats-vercel&theme=transparent&title_color=24131F&text_color=665C62&icon_color=66023C"
+        data-src-dark="https://github-readme-stats-vercel-seven.vercel.app/api/top-langs?username=AlexJoaquimPereira&locale=en&layout=compact&langs_count=6&card_width=467&size_weight=0.5&count_weight=0.5&hide_border=true&bg_color=00000000&exclude_repo=github-readme-stats-vercel&theme=transparent&title_color=F3EDF1&text_color=B8AAB4&icon_color=D06A9E">
+  <img src="https://github-readme-stats-vercel-seven.vercel.app/api/top-langs?username=AlexJoaquimPereira&locale=en&layout=compact&langs_count=6&card_width=467&size_weight=0.5&count_weight=0.5&hide_border=true&bg_color=00000000&exclude_repo=github-readme-stats-vercel&theme=transparent&title_color=24131F&text_color=665C62&icon_color=66023C" alt="Most used languages across AlexJoaquimPereira's public repositories" width="467" height="215" loading="lazy" data-stat-img />
+  <figcaption class="stat-fallback" hidden>
+    <p>GitHub statistics are temporarily unavailable.</p>
+    <a class="more-link" href="https://github.com/AlexJoaquimPereira" target="_blank" rel="noopener noreferrer">View GitHub profile →<span class="visually-hidden"> (opens in a new tab)</span></a>
+  </figcaption>
+</figure>
+
+    </div>
+
+    <p class="after-list" data-reveal>
+      <a class="more-link" href="https://github.com/AlexJoaquimPereira" target="_blank" rel="noopener noreferrer">View GitHub profile →<span class="visually-hidden"> (opens in a new tab)</span></a>
+    </p>
   </div>
 </section>
 
 <section class="section" id="writing" aria-labelledby="writing-title">
   <div class="container">
     <div class="section-head" data-reveal>
-  <span class="section-eyebrow"><span class="eyebrow-num" aria-hidden="true">03</span>Writing</span>
+  <span class="section-eyebrow"><span class="eyebrow-num" aria-hidden="true">04</span>Writing</span>
   
   <h2>Articles & notes</h2>
   
@@ -273,6 +368,9 @@
     <li class="tag">Sample</li><li class="tag">Learning</li>
   </ul>
   
+  
+  
+  
 </article>
 
       
@@ -288,7 +386,7 @@
 <section class="section" id="skills" aria-labelledby="skills-title">
   <div class="container">
     <div class="section-head" data-reveal>
-  <span class="section-eyebrow"><span class="eyebrow-num" aria-hidden="true">04</span>Skills</span>
+  <span class="section-eyebrow"><span class="eyebrow-num" aria-hidden="true">05</span>Skills</span>
   
   <h2>Languages & tools</h2>
   
@@ -318,54 +416,6 @@
         </ul>
       </div>
     </div>
-  </div>
-</section>
-
-
-
-<section class="section" id="github" aria-labelledby="github-title">
-  <div class="container">
-    
-    <div class="section-head" data-reveal>
-  <span class="section-eyebrow"><span class="eyebrow-num" aria-hidden="true">05</span>GitHub</span>
-  
-  <h2>Activity snapshot</h2>
-  
-  <p>A small snapshot of what I’ve been working on lately, straight from my <a href="https://github.com/AlexJoaquimPereira">GitHub profile</a>.</p>
-</div>
-
-
-    <div class="github-grid" data-reveal-group>
-      
-
-<figure class="stat-card" data-stat
-        data-src-light="https://github-readme-stats-vercel-seven.vercel.app/api?username=AlexJoaquimPereira&show_icons=true&rank_icon=github&hide_rank=false&hide_border=true&bg_color=00000000&theme=transparent&title_color=1b1b18&text_color=5b5a55&icon_color=4338ca"
-        data-src-dark="https://github-readme-stats-vercel-seven.vercel.app/api?username=AlexJoaquimPereira&show_icons=true&rank_icon=github&hide_rank=false&hide_border=true&bg_color=00000000&theme=transparent&title_color=e9e9ec&text_color=a3a3ab&icon_color=a5b4fc">
-  <img src="https://github-readme-stats-vercel-seven.vercel.app/api?username=AlexJoaquimPereira&show_icons=true&rank_icon=github&hide_rank=false&hide_border=true&bg_color=00000000&theme=transparent&title_color=1b1b18&text_color=5b5a55&icon_color=4338ca" alt="GitHub statistics card for AlexJoaquimPereira: stars, commits, pull requests and rank" width="495" height="195" loading="lazy" data-stat-img />
-  <figcaption class="stat-fallback" hidden>
-    <p>GitHub statistics are temporarily unavailable.</p>
-    <a class="more-link" href="https://github.com/AlexJoaquimPereira" target="_blank" rel="noopener noreferrer">View GitHub profile →<span class="visually-hidden"> (opens in a new tab)</span></a>
-  </figcaption>
-</figure>
-
-
-      
-
-<figure class="stat-card" data-stat
-        data-src-light="https://github-readme-stats-vercel-seven.vercel.app/api/top-langs?username=AlexJoaquimPereira&locale=en&layout=compact&langs_count=8&size_weight=0.5&count_weight=0.5&hide_border=true&bg_color=00000000&exclude_repo=github-readme-stats-vercel&theme=transparent&title_color=1b1b18&text_color=5b5a55&icon_color=4338ca"
-        data-src-dark="https://github-readme-stats-vercel-seven.vercel.app/api/top-langs?username=AlexJoaquimPereira&locale=en&layout=compact&langs_count=8&size_weight=0.5&count_weight=0.5&hide_border=true&bg_color=00000000&exclude_repo=github-readme-stats-vercel&theme=transparent&title_color=e9e9ec&text_color=a3a3ab&icon_color=a5b4fc">
-  <img src="https://github-readme-stats-vercel-seven.vercel.app/api/top-langs?username=AlexJoaquimPereira&locale=en&layout=compact&langs_count=8&size_weight=0.5&count_weight=0.5&hide_border=true&bg_color=00000000&exclude_repo=github-readme-stats-vercel&theme=transparent&title_color=1b1b18&text_color=5b5a55&icon_color=4338ca" alt="Most used languages across AlexJoaquimPereira's public repositories" width="495" height="200" loading="lazy" data-stat-img />
-  <figcaption class="stat-fallback" hidden>
-    <p>GitHub statistics are temporarily unavailable.</p>
-    <a class="more-link" href="https://github.com/AlexJoaquimPereira" target="_blank" rel="noopener noreferrer">View GitHub profile →<span class="visually-hidden"> (opens in a new tab)</span></a>
-  </figcaption>
-</figure>
-
-    </div>
-
-    <p class="after-list" data-reveal>
-      <a class="more-link" href="https://github.com/AlexJoaquimPereira" target="_blank" rel="noopener noreferrer">View GitHub profile →<span class="visually-hidden"> (opens in a new tab)</span></a>
-    </p>
   </div>
 </section>
 
