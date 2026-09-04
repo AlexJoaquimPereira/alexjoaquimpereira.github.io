@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Build and deploy Jekyll site to GitHub Pages
 
 on:
   push:
@@ -18,15 +18,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # This is a plain static site — no build step required.
-      # Export exactly the tracked files into dist/ and publish that.
-      - name: Collect site files
-        run: |
-          mkdir -p dist
-          git archive HEAD | tar -x -C dist
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+          bundler-cache: true
+
+      - name: Build site
+        run: bundle exec jekyll build
+        env:
+          JEKYLL_ENV: production
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          publish_dir: ./_site
