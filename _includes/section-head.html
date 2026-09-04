@@ -1,0 +1,9 @@
+<div class="section-head" data-reveal>
+  <span class="section-eyebrow">{% if include.num %}<span class="eyebrow-num" aria-hidden="true">{{ include.num }}</span>{% endif %}{{ include.eyebrow }}</span>
+  {% if include.level == 'h1' %}
+  <h1>{{ include.title }}</h1>
+  {% else %}
+  <h2>{{ include.title }}</h2>
+  {% endif %}
+  {% if include.desc %}<p>{{ include.desc | markdownify | remove: '<p>' | remove: '</p>' | strip }}</p>{% endif %}
+</div>
