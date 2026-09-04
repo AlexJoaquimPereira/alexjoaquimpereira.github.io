@@ -45,7 +45,18 @@ hero copy, about paragraphs). Every section of the site updates from it.
   github: "https://github.com/you/repo"
   live: "https://example.com"          # optional
   image: "/assets/images/projects/my-project.jpg"  # optional
+  featured: true                       # optional — one big showcase card
 ```
+
+One project may be marked `featured: true` (renders as the large showcase
+card, and is the only entry that displays an image). Everything else renders
+as a supporting row — image-less by design, no placeholder art needed.
+
+**Activate the Substack integration** (when it exists) → in
+`_data/profile.yml`, uncomment the `substack:` block, set `enabled: true`
+and your real URL. Posts tagged with `shared_tag` (default `tech`) then show
+a small "Also on Substack" link on the homepage cards and article pages.
+While `enabled` is false or commented out, nothing Substack-related renders.
 
 **Add an article** → create `_posts/YYYY-MM-DD-my-title.md`:
 
@@ -68,7 +79,8 @@ Push, and it appears in the Writing section and `/articles/` automatically
 Do not fabricate content — an honest empty state beats a fake entry.
 
 **Profile photo** → add `assets/images/profile.jpg`. The hero picks it up
-automatically (placeholder shows until the file exists).
+automatically; until then an empty framed slot renders (no placeholder text
+is ever shown to visitors).
 
 **Résumé** → currently a Canva link in `_data/profile.yml`. To use a PDF:
 set `resume.url: "/assets/resume.pdf"` and `resume.external: false`, then
@@ -76,9 +88,18 @@ add the file.
 
 ## Design notes
 
+- **Palette**: warm parchment neutrals with a Tyrian-purple/plum accent
+  (`--accent`), amaranth (`--accent-alt`) for hover states, and rare gold
+  (`--gold`) / botanical (`--earth`) details. All tokens live at the top of
+  `css/style.css`; both themes are hand-tuned, not inverted.
+
+## Design notes
+
 - Light/dark theme: follows the system until the visitor toggles; saved in
   `localStorage`; palette lives at the top of `css/style.css`.
-- Motion: CSS keyframes + IntersectionObserver, all gated behind
+- Motion: CSS keyframes + IntersectionObserver. Reveals **replay** — they
+  play when an element enters the viewport and reset once it leaves, so
+  scrolling back re-animates them. All gated behind
   `prefers-reduced-motion: reduce` and a `js` class (content is never hidden
   when JS is off).
 - GitHub stat cards are third-party images (github-readme-stats). If the
