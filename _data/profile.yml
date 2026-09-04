@@ -5,7 +5,7 @@
 # ============================================================
 
 name: "Alex Joaquim Pereira"
-initials: "AP"
+initials: "AJP"
 
 # --- Profile photo -------------------------------------------
 # assets/images/profile.jpg — portrait orientation, ~4:5 looks best.
@@ -20,14 +20,11 @@ education:
 # --- Hero ------------------------------------------------------
 hero:
   introduction: >-
-    Computer Engineering student at **Goa College of Engineering**.
-    I like solving problems through programming and am currently
-    exploring **Python** and **JavaScript**, with a growing interest
-    in UI/UX and competitive coding.
+    Computer Engineering grad from GEC with hands-on corporate experience in QA Automation. Proficient in Core Java, Python, C++, and JavaScript, with specialized technical expertise in building automation frameworks using Selenium WebDriver and Cucumber (BDD).
   facts:
-    - "Computer Engineering @ GEC Goa"
-    - "Exploring Python & JavaScript"
-    - "Open to collaborating on app & web projects"
+    - "Computer Engineer (2026)"
+    - "Worked as Software Engineering & QA Intern"
+    - "Open Source & Cloud (AWS) Enthusiast"
   actions:
     - label: "View projects"
       url: "#projects"
@@ -41,29 +38,26 @@ hero:
 about:
   body:
     - >-
-      I'm a motivated and curious student who enjoys upskilling myself and
-      building solutions to problems through programming. Right now most of
-      my time goes into coursework at Goa College of Engineering and learning
-      by doing — small programs, practice problems, and experiments with
-      Python and JavaScript.
+      I am a Computer Engineer graduated from Goa College of Engineering with a strong foundation in software development, test automation, and full-stack web applications. Driven by curiosity and a passion for open-source technologies, cloud computing, and frontend development, I love transforming complex ideas into functional, scalable software.
     - >-
-      Outside of code, I enjoy participating in quizzes and trivia, thinking
-      about UI/UX, writing articles, and singing and playing classics.
+      My technical journey includes hands-on experience in both building and breaking software. During my time as an Engineering Intern at OneShield India, I focused on QA and Test Automation, writing robust test cases for enterprise-level software using Selenium and Cucumber. On the development side, I enjoy building responsive cross-platform applications, having developed a full-stack social networking application using the MERN stack and React Native.
+    - >-
+      Beyond coding, I thrive in fast-paced, collaborative environments. Whether I’m regularly tackling algorithmic challenges in competitive programming contests or leading a team to manage live events as a Coordinator for our technical festival, TECHNIX, I enjoy problem-solving under pressure and driving projects to success.
     - >-
       I'm looking to collaborate on a few app and web based projects I have
       planned out. If that sounds interesting, feel free to
       [get in touch](#contact).
   facts:
     education: "Computer Engineering, Goa College of Engineering"
-    learning: ["Python", "JavaScript", "C", "C++"]
-    interests: ["UI/UX", "Competitive programming", "Quizzes & trivia", "Writing", "Music"]
+    learning: ["AI Engineering", "Agentic AI"]
+    interests: ["QA and Automation", "AI/ML", "Quizzes & trivia", "Writing"]
     looking_for: "Collaboration on app & web based projects"
 
 # --- Skills (grouped tags — no proficiency ratings) -----------
 skills:
-  languages: ["C", "C++", "Python", "JavaScript"]
-  web: ["HTML", "CSS", "JavaScript"]
-  interests: ["UI/UX", "Competitive programming", "Practice on Exercism & CodeChef"]
+  languages: ["C/C++", "Java", "Python", "JavaScript"]
+  web: ["React/React Native", "", "JavaScript"]
+  interests: ["QA and Automation", "UI/UX"]
 
 # --- Social / external links (all verified) -------------------
 social:
@@ -101,7 +95,7 @@ resume:
 # --- Contact ----------------------------------------------------
 contact:
   blurb: >-
-    Whether it's a project idea, a question, or just a hello — my inbox is
+    Whether it's a project idea, a question, or just a hello; my inbox is
     open. The form below reaches me directly, or find me on any of these
     platforms.
   # Formspree endpoint (replace with your own if it ever changes).
