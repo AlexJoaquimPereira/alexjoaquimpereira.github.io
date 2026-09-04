@@ -128,7 +128,7 @@ github:
   # top_langs uses card_width=467 & langs_count=6 so both cards share the
   # same visual scale (stats: 467x195, langs: 467x215).
   stats_url: "https://github-readme-stats-vercel-seven.vercel.app/api?username=AlexJoaquimPereira&show_icons=true&rank_icon=github&hide_rank=false&hide_border=true&bg_color=00000000"
-  top_langs_url: "https://github-readme-stats-vercel-seven.vercel.app/api/top-langs?username=AlexJoaquimPereira&locale=en&layout=compact&langs_count=6&card_width=467&size_weight=0.5&count_weight=0.5&hide_border=true&bg_color=00000000&exclude_repo=github-readme-stats-vercel"
+  top_langs_url: "https://github-readme-stats-vercel-seven.vercel.app/api/top-langs?username=AlexJoaquimPereira&locale=en&layout=compact&langs_count=8&card_width=467&size_weight=0.5&count_weight=0.5&hide_border=true&bg_color=00000000&exclude_repo=github-readme-stats-vercel"
 
 # --- Substack (FUTURE — DO NOT enable until it exists) -----------
 # To activate later:
