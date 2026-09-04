@@ -17,27 +17,34 @@
 # Do not add metrics, users, or claims that aren't real.
 # ============================================================
 
-- title: "OpenCode Agents"
+- title: "OpenCode Agent Config"
   featured: true
   description: >-
     OpenCode agents configured around DeepSeek V4 Flash 0731, GLM-5.3-Flash
     and GPT-5.6 Luna as backend models; chosen specifically to maximise
     programming tasks completed per dollar.
-  technologies: ["JavaScript"]
+    In progress.
+  technologies: ["JavaScript", "Agentic AI"]
   github: "https://github.com/AlexJoaquimPereira/opencode-agent-config"
 
-- title: "FortiPrompt RedTeam"
+- title: "FortiPrompt-RedTeam"
   description: >-
     Automated adversarial prompt generation and synthetic dataset creation.
+    Complements the core FortiPrompt malicious prompt detection component.
+  technologies: ["TensorFlow"]
   github: "https://github.com/AlexJoaquimPereira/FortiPrompt-redteam"
 
 - title: "FortiPrompt Evaluation System"
   description: >-
-    A simplified red-team evaluation pipeline for LLMs.
+    A simplified red-team evaluation pipeline for LLMs. Used to test and
+    evaluate prompts and responses within FortiPrompt system.
+  technologies: ["langgraph"]
   github: "https://github.com/AlexJoaquimPereira/FortiPrompt-redteam-evaluator-v3"
 
-- title: "Social Media Application — Semester 5"
+- title: "Social Media Application (DBMQP, Sem 5)"
   description: >-
     Our Database Management and Query Processing project in Semester 5.
-  technologies: ["JavaScript"]
+    A Reddit clone written in React Native within MERN, prioritizing
+    simplicity and usage ease.
+  technologies: ["React Native", "NodeJS", "ExpressJS", "MongoDB"]
   github: "https://github.com/AlexJoaquimPereira/Database-Management-Query-Processing-Project-SEM5"
