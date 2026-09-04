@@ -7,18 +7,25 @@
 :root {
   color-scheme: light;
 
-  --bg: #fafaf8;
-  --surface: #ffffff;
-  --text: #1b1b18;
-  --muted: #5b5a55;
-  --border: #e5e3dd;
-  --border-strong: #d4d2cb;
+  --bg: #FBF7F2;
+  --surface: #FFFDF9;
+  --text: #24131F;
+  --muted: #665C62;
+  --border: #E6DDD8;
+  --border-strong: #D3C5C8;
 
-  --accent: #4338ca;
+  --accent: #66023C;
+  --accent-strong: #4B1740;
+  --accent-alt: #9F2B68;
+  --accent-soft: #F4E8EF;
   --accent-ink: #ffffff;
-  --accent-soft: #eeedfb;
 
-  --shadow: 0 1px 2px rgba(27, 27, 24, 0.05);
+  --earth: #586747;
+  --earth-soft: #EBEFE6;
+  --gold: #8A6A24;
+  --gold-soft: #F4EDD8;
+
+  --shadow: 0 1px 2px rgba(36, 19, 31, 0.05);
 
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
@@ -47,16 +54,23 @@
 [data-theme="dark"] {
   color-scheme: dark;
 
-  --bg: #141419;
-  --surface: #1b1b22;
-  --text: #e9e9ec;
-  --muted: #a3a3ab;
-  --border: #2a2a33;
-  --border-strong: #3a3a45;
+  --bg: #121014;
+  --surface: #1B161C;
+  --text: #F3EDF1;
+  --muted: #B8AAB4;
+  --border: #342832;
+  --border-strong: #473642;
 
-  --accent: #a5b4fc;
-  --accent-ink: #141419;
-  --accent-soft: #23233a;
+  --accent: #D06A9E;
+  --accent-strong: #E4A0BF;
+  --accent-alt: #C7669F;
+  --accent-soft: #34202E;
+  --accent-ink: #121014;
+
+  --earth: #AFC18A;
+  --earth-soft: #242A20;
+  --gold: #D7B55B;
+  --gold-soft: #302A1B;
 
   --shadow: none;
 }
@@ -346,9 +360,9 @@ pre code {
 }
 
 .eyebrow-num {
-  color: var(--muted);
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  color: var(--gold);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
 }
 
 .section-eyebrow::after {
@@ -419,9 +433,13 @@ main {
   background: var(--surface);
 }
 
+/* Empty framed slot shown only while assets/images/profile.jpg doesn't exist */
 .hero-photo-slot {
-  min-height: 0;
-  font-size: 0.72rem;
+  background: linear-gradient(
+    160deg,
+    var(--accent-soft),
+    var(--surface) 65%
+  );
 }
 
 @media (hover: hover) {
@@ -430,9 +448,18 @@ main {
   }
 }
 
+/* Hero content rhythm: one cohesive block —
+   name → introduction → facts → CTAs, connected by consistent gaps */
+.hero-content {
+  display: grid;
+  gap: var(--sp-4);
+  justify-items: start;
+  align-content: center;
+}
+
 .hero h1 {
   font-size: clamp(2.1rem, 5vw, 3rem);
-  margin: 0 0 var(--sp-3);
+  margin: 0;
 }
 
 .hero-intro {
@@ -477,10 +504,12 @@ main {
   flex-shrink: 0;
 }
 
+/* CTAs close the hero copy — a touch more air before them */
 .cta-row {
   display: flex;
   flex-wrap: wrap;
   gap: var(--sp-3);
+  margin-top: var(--sp-1);
 }
 
 /* ---------- Buttons ---------- */
@@ -630,36 +659,72 @@ a.card-link:focus-visible {
   list-style: none;
 }
 
-/* ---------- Projects ---------- */
-.project-grid {
+/* ---------- Projects ----------
+   Editorial showcase: one featured project, supporting rows.
+   Projects without images are the default, fully-supported state. */
+.project-featured {
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  padding: var(--sp-5) var(--sp-5) var(--sp-5) var(--sp-5);
   display: grid;
-  gap: var(--sp-4);
-  grid-template-columns: 1fr;
-}
-
-.project-card {
-  display: flex;
-  flex-direction: column;
   gap: var(--sp-3);
-  height: 100%;
+  justify-items: start;
 }
 
-.project-card header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: var(--sp-3);
-}
-
-.project-card h3 {
-  font-size: 1.1rem;
+.project-featured h3 {
+  font-size: 1.4rem;
   margin: 0;
 }
 
-.project-card p {
+.project-featured p {
+  margin: 0;
+  color: var(--muted);
+  max-width: 62ch;
+}
+
+.project-featured .project-image {
+  margin-bottom: var(--sp-2);
+}
+
+.project-rows {
+  list-style: none;
+  margin: var(--sp-4) 0 0;
+  padding: 0;
+}
+
+.project-row {
+  border-top: 1px solid var(--border);
+  padding-block: var(--sp-4);
+  display: grid;
+  gap: var(--sp-2);
+}
+
+.project-row-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-2) var(--sp-3);
+}
+
+.project-row h4 {
+  font-size: 1.02rem;
+  margin: 0;
+  font-weight: 650;
+}
+
+.project-row p {
   margin: 0;
   color: var(--muted);
   font-size: 0.95rem;
+  max-width: 68ch;
+}
+
+.project-row .project-links {
+  margin-top: 0;
 }
 
 .project-tags {
@@ -682,7 +747,7 @@ a.card-link:focus-visible {
 .project-links {
   display: flex;
   gap: var(--sp-4);
-  margin-top: auto;
+  margin-top: var(--sp-1);
   font-size: 0.92rem;
 }
 
@@ -697,23 +762,6 @@ a.card-link:focus-visible {
   border-radius: var(--radius-sm);
   padding: 0.1rem 0.5rem;
   white-space: nowrap;
-}
-
-/* Image / content placeholder blocks (replace with real assets later) */
-.placeholder {
-  display: grid;
-  place-items: center;
-  min-height: 8.5rem;
-  border: 1.5px dashed var(--border-strong);
-  border-radius: var(--radius-sm);
-  background: var(--surface);
-  background: color-mix(in srgb, var(--border) 28%, transparent);
-  color: var(--muted);
-  font-size: 0.82rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  text-align: center;
-  padding: var(--sp-4);
 }
 
 /* ---------- Articles ---------- */
@@ -757,6 +805,9 @@ a.card-link:focus-visible {
 .article-item h3 {
   font-size: 1.25rem;
   margin: 0 0 var(--sp-2);
+  font-family: var(--font-serif);
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 .article-item h2 a,
@@ -790,6 +841,32 @@ a.card-link:focus-visible {
 .more-link {
   font-weight: 600;
   font-size: 0.95rem;
+  display: inline-block;
+}
+
+/* Serif headings give Writing its editorial voice */
+#writing .section-head h1,
+#writing .section-head h2 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Future Substack cross-link — renders only when enabled in _data/profile.yml */
+.substack-link-row {
+  margin: 0;
+}
+
+.substack-link {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--gold);
+  text-decoration-color: color-mix(in srgb, var(--gold) 45%, transparent);
+}
+
+.substack-link:hover {
+  color: var(--text);
+  text-decoration-color: currentColor;
 }
 
 /* ---------- Article page ---------- */
@@ -800,6 +877,9 @@ a.card-link:focus-visible {
 }
 
 .article-header h1 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  letter-spacing: -0.01em;
   font-size: clamp(1.7rem, 4vw, 2.4rem);
   margin: var(--sp-3) 0 var(--sp-3);
 }
@@ -837,11 +917,6 @@ a.card-link:focus-visible {
 .prose img {
   border-radius: var(--radius);
   border: 1px solid var(--border);
-}
-
-.prose .placeholder {
-  font-family: var(--font-sans);
-  margin-block: var(--sp-5);
 }
 
 .article-footer {
@@ -961,15 +1036,11 @@ a.card-link:focus-visible {
 }
 
 .form-status[data-status="success"] {
-  color: #1a7f37;
+  color: var(--earth);
 }
 
 .form-status[data-status="error"] {
   color: #b42318;
-}
-
-[data-theme="dark"] .form-status[data-status="success"] {
-  color: #4ade80;
 }
 
 [data-theme="dark"] .form-status[data-status="error"] {
@@ -1041,10 +1112,6 @@ a.card-link:focus-visible {
   .about-grid {
     grid-template-columns: 3fr 2fr;
     gap: var(--sp-7);
-  }
-
-  .project-grid {
-    grid-template-columns: repeat(2, 1fr);
   }
 
   .hero {
@@ -1138,20 +1205,19 @@ a.card-link:focus-visible {
 }
 
 /* ---------- Card hover polish ---------- */
-.project-card,
+.project-featured,
 .skill-group,
-.stat-card,
-.fact-list-card {
+.stat-card {
   transition:
     border-color 0.3s ease,
     box-shadow 0.3s ease;
 }
 
-.project-card:hover,
+.project-featured:hover,
 .skill-group:hover,
 .stat-card:hover {
   border-color: var(--border-strong);
-  box-shadow: 0 8px 24px -16px rgba(15, 15, 20, 0.35);
+  box-shadow: 0 8px 24px -16px rgba(36, 19, 31, 0.35);
 }
 
 /* ---------- Projects ---------- */
