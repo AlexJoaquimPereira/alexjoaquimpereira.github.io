@@ -1,20 +1,43 @@
 # ============================================================
-# PROJECTS — each entry becomes a card on the homepage.
+# PROJECTS — real, verifiable work. Each entry becomes part of
+# the homepage showcase.
 #
 # Fields:
-#   title, description, technologies (list), github, live, image, sample
+#   title         required
+#   description   required — keep it factual, one or two sentences
+#   technologies  optional list (e.g. the repository's primary language)
+#   github        optional repository URL
+#   live          optional live demo URL
+#   image         optional screenshot at assets/images/projects/…
+#                 (only shown for the featured project; image-less
+#                 entries are fully supported and look intentional)
+#   featured      optional — one project renders as the featured
+#                 showcase; the rest render as supporting rows
 #
-# Do not add metrics/claims that aren't real. Delete the sample
-# entry once you have a real project to feature.
+# Do not add metrics, users, or claims that aren't real.
 # ============================================================
 
-- title: "Sample project — replace me"
-  sample: true
+- title: "OpenCode Agents"
+  featured: true
   description: >-
-    This card is an example of the layout so you can see how featured work
-    will look. Replace it with a real project: a short description, the
-    technologies used, and links to the repository and live demo.
-  technologies: ["Python", "JavaScript"]
-  github: "https://github.com/AlexJoaquimPereira"
-  # live: "https://example.com"
-  # image: "/assets/images/projects/my-project.jpg"
+    OpenCode agents configured around DeepSeek V4 Flash 0731, GLM-5.3-Flash
+    and GPT-5.6 Luna as backend models; chosen specifically to maximise
+    programming tasks completed per dollar.
+  technologies: ["JavaScript"]
+  github: "https://github.com/AlexJoaquimPereira/opencode-agent-config"
+
+- title: "FortiPrompt RedTeam"
+  description: >-
+    Automated adversarial prompt generation and synthetic dataset creation.
+  github: "https://github.com/AlexJoaquimPereira/FortiPrompt-redteam"
+
+- title: "FortiPrompt Evaluation System"
+  description: >-
+    A simplified red-team evaluation pipeline for LLMs.
+  github: "https://github.com/AlexJoaquimPereira/FortiPrompt-redteam-evaluator-v3"
+
+- title: "Social Media Application — Semester 5"
+  description: >-
+    Our Database Management and Query Processing project in Semester 5.
+  technologies: ["JavaScript"]
+  github: "https://github.com/AlexJoaquimPereira/Database-Management-Query-Processing-Project-SEM5"
