@@ -1,11 +1,14 @@
-/* Alex Joaquim Pereira — site enhancements.
-   Everything here is progressive: the site works fully without it. */
+/* Alex Joaquim Pereira — site behaviour.
+   Progressive enhancements only: every feature here degrades
+   gracefully and the site is fully usable without JavaScript. */
 (function () {
   "use strict";
 
+  var root = document.documentElement;
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
   /* ----- Theme toggle ----- */
   var toggle = document.querySelector("[data-theme-toggle]");
-  var root = document.documentElement;
 
   function labelButton() {
     var dark = root.dataset.theme === "dark";
@@ -23,6 +26,7 @@
         localStorage.setItem("theme", next);
       } catch (e) { /* private mode: ignore */ }
       labelButton();
+      syncStatTheme();
     });
   }
 
@@ -32,7 +36,7 @@
 
   /* ----- Scrollspy: highlight the section currently in view ----- */
   var navLinks = Array.prototype.slice.call(
-    document.querySelectorAll('.site-nav a[href^="#"]')
+    document.querySelectorAll('.site-nav a[href*="#"]')
   );
 
   if ("IntersectionObserver" in window && navLinks.length) {
@@ -47,7 +51,7 @@
           navLinks.forEach(function (a) {
             if (a.hash === "#" + entry.target.id) {
               a.setAttribute("aria-current", "true");
-            } else {
+            } else if (a.getAttribute("href").indexOf("#") === 0) {
               a.removeAttribute("aria-current");
             }
           });
@@ -57,6 +61,105 @@
     );
 
     sections.forEach(function (s) { spy.observe(s); });
+  }
+
+  /* ----- Scroll reveals (staggered) -----
+     Reduced-motion users and browsers without IO see everything at once. */
+  var revealables = Array.prototype.slice.call(document.querySelectorAll("[data-reveal]"));
+
+  function revealAll() {
+    revealables.forEach(function (el) { el.classList.add("is-revealed"); });
+  }
+
+  if (!reduceMotion.matches && "IntersectionObserver" in window && revealables.length) {
+    revealables.forEach(function (el) {
+      var group = el.closest("[data-reveal-group]");
+      if (group) {
+        var siblings = Array.prototype.slice.call(group.querySelectorAll("[data-reveal]"));
+        el.style.setProperty("--reveal-delay", siblings.indexOf(el) * 70 + "ms");
+      }
+    });
+
+    var revealer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-revealed");
+            revealer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -5% 0px" }
+    );
+
+    revealables.forEach(function (el) { revealer.observe(el); });
+  } else {
+    revealAll();
+  }
+
+  /* ----- GitHub stat cards: theme-aware source + failure fallback ----- */
+  var statCards = Array.prototype.slice.call(document.querySelectorAll("[data-stat]"));
+
+  function syncStatTheme() {
+    if (!statCards.length) return;
+    var key = root.dataset.theme === "dark" ? "srcDark" : "srcLight";
+    statCards.forEach(function (card) {
+      if (card.classList.contains("is-failed")) return;
+      var img = card.querySelector("[data-stat-img]");
+      var src = card.getAttribute("data-" + key.replace(/[A-Z]/g, function (m) { return "-" + m.toLowerCase(); }));
+      if (img && src && img.getAttribute("src") !== src) img.setAttribute("src", src);
+    });
+  }
+
+  statCards.forEach(function (card) {
+    var img = card.querySelector("[data-stat-img]");
+    if (!img) return;
+    img.addEventListener("error", function () {
+      card.classList.add("is-failed");
+      var fallback = card.querySelector(".stat-fallback");
+      if (fallback) fallback.hidden = false;
+    });
+  });
+
+  syncStatTheme();
+
+  /* ----- Hero frame parallax (desktop, motion allowed) -----
+     rAF-throttled; only touches a CSS variable → transform only. */
+  var heroMedia = document.querySelector(".hero-media");
+  var ticking = false;
+
+  if (heroMedia && !reduceMotion.matches) {
+    var onScroll = function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        ticking = false;
+        if (window.innerWidth < 900) return;
+        var y = Math.min(window.scrollY, 600);
+        heroMedia.style.setProperty("--py", (y * 0.012).toFixed(3) + "rem");
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+  }
+
+  /* ----- Reading progress (article pages) ----- */
+  var progress = document.querySelector("[data-progress]");
+
+  if (progress && !reduceMotion.matches) {
+    var progressTick = false;
+    var updateProgress = function () {
+      progressTick = false;
+      var doc = document.documentElement;
+      var max = doc.scrollHeight - window.innerHeight;
+      var value = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
+      progress.style.transform = "scaleX(" + value + ")";
+    };
+    window.addEventListener("scroll", function () {
+      if (progressTick) return;
+      progressTick = true;
+      requestAnimationFrame(updateProgress);
+    }, { passive: true });
+    updateProgress();
   }
 
   /* ----- Contact form: AJAX submit with inline status (falls back to normal POST) ----- */

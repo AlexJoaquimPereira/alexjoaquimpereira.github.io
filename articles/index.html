@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+  <!-- Set theme before first paint to avoid a flash (defaults to system preference) -->
   <script>
     (function () {
       try {
@@ -16,21 +17,43 @@
     })();
   </script>
 
+  
+  
   <title>Writing — Alex Joaquim Pereira</title>
   <meta name="description" content="Articles and notes by Alex Joaquim Pereira — programming, design, and things I'm learning." />
   <link rel="canonical" href="https://alexjoaquimpereira.github.io/articles/" />
 
+  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Alex Joaquim Pereira" />
-  <meta property="og:title" content="Writing — Alex Joaquim Pereira" />
-  <meta property="og:description" content="Articles and notes on programming, design, and things I'm learning." />
+  <meta property="og:title" content="Writing" />
+  <meta property="og:description" content="Articles and notes by Alex Joaquim Pereira — programming, design, and things I'm learning." />
   <meta property="og:url" content="https://alexjoaquimpereira.github.io/articles/" />
+  
+  <!-- [PLACEHOLDER: SOCIAL PREVIEW IMAGE] — add a 1200x630 image at assets/images/og-image.png
+       and uncomment the next line to enable a site-wide social preview:
+  <meta property="og:image" content="https://alexjoaquimpereira.github.io/assets/images/og-image.png" />
+  -->
 
   <meta name="theme-color" content="#fafaf8" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#141419" media="(prefers-color-scheme: dark)" />
-  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
 
-  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Alex Joaquim Pereira",
+    "url": "https://alexjoaquimpereira.github.io/",
+    "description": "Computer Engineering student at Goa College of Engineering.",
+    "affiliation": { "@type": "Organization", "name": "Goa College of Engineering" },
+    "sameAs": ["https://github.com/AlexJoaquimPereira", "https://www.linkedin.com/in/alex-joaquim-pereira/", "https://instagram.com/hanv_alexpereira", "https://exercism.org/profiles/AlexJoaquimPereira", "https://www.codechef.com/users/alexpereira", "https://linktr.ee/alexjoaquimpereira"]
+  }
+  </script>
+
+  <script>document.documentElement.classList.add("js");</script>
 </head>
 
 <body>
@@ -38,17 +61,20 @@
 
   <header class="site-header">
     <div class="container">
-      <a class="brand" href="../index.html">
+      <a class="brand" href="/">
         <span class="brand-mark" aria-hidden="true">AP</span>
         <span>Alex Joaquim Pereira</span>
       </a>
 
+      
+      
+
       <nav class="site-nav" aria-label="Main">
-        <a href="../index.html#about">About</a>
-        <a href="../index.html#projects">Projects</a>
-        <a href="../index.html#writing" aria-current="true">Writing</a>
-        <a href="../index.html#skills">Skills</a>
-        <a href="../index.html#contact">Contact</a>
+        <a href="/#about">About</a>
+        <a href="/#projects">Projects</a>
+        <a href="/#writing" aria-current="true">Writing</a>
+        <a href="/#skills">Skills</a>
+        <a href="/#contact">Contact</a>
         <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark theme">
           <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
@@ -63,48 +89,54 @@
   </header>
 
   <main id="main">
-    <section class="section" aria-labelledby="writing-title">
-      <div class="container">
-        <div class="section-head">
-          <span class="section-eyebrow">Writing</span>
-          <h1 id="writing-title">Articles &amp; notes</h1>
-          <p>
-            Things I'm learning and thinking about — programming, design, and other
-            detours.
-          </p>
-        </div>
+    <section class="section" aria-labelledby="articles-title">
+  <div class="container">
+    <div class="section-head" data-reveal>
+  <span class="section-eyebrow">Writing</span>
+  
+  <h1>Articles & notes</h1>
+  
+  <p>Things I’m learning and thinking about — programming, design, and other detours.</p>
+</div>
 
-        <div class="article-list text-measure">
-          <!--
-            HOW TO ADD AN ARTICLE (summary — full steps in README.md):
-            1. Copy articles/_template.html to articles/your-slug.html and write.
-            2. Copy this <article> block, update title/date/summary/tags/link.
-          -->
-          <article class="article-item card">
-            <div class="article-meta">
-              <time datetime="2026-09-01">Sep 1, 2026</time>
-              <span aria-hidden="true">·</span>
-              <span>2 min read</span>
-              <span class="badge">Sample</span>
-            </div>
-            <h2><a href="learning-in-small-projects.html">How I learn a language with small projects</a></h2>
-            <p class="summary">
-              A short walk-through of the way I approach a new programming language:
-              pick a tiny idea, build it end to end, and let the problems teach the
-              syntax. This is placeholder content — replace it with a real article.
-            </p>
-            <ul class="tag-list">
-              <li class="tag">Sample</li>
-              <li class="tag">Learning</li>
-            </ul>
-          </article>
-        </div>
 
-        <p class="muted" style="margin-top: var(--sp-6); font-size: 0.9rem;">
-          More coming soon.
-        </p>
-      </div>
-    </section>
+    
+    <div class="article-list text-measure" data-reveal-group>
+      
+        
+<article class="article-item card" data-reveal>
+  <div class="article-meta">
+    <time datetime="2026-09-01T00:00:00+00:00">Sep 1, 2026</time>
+    <span aria-hidden="true">·</span>
+    
+
+
+
+<span>2 min read</span>
+
+    <span class="badge">Sample</span>
+  </div>
+  
+  <h2><a href="/articles/learning-in-small-projects/">How I learn a language with small projects</a></h2>
+  
+  <p class="summary">A short walk-through of the way I approach a new programming language: pick a tiny idea, build it end to end, and let the problems teach the syntax. This is placeholder content — replace it with a real article.</p>
+  
+  <ul class="tag-list">
+    <li class="tag">Sample</li><li class="tag">Learning</li>
+  </ul>
+  
+</article>
+
+      
+    </div>
+    
+
+    <p class="muted after-list" data-reveal style="font-size: 0.9rem;">
+      More coming soon.
+    </p>
+  </div>
+</section>
+
   </main>
 
   <footer class="site-footer">
@@ -114,15 +146,15 @@
         <a href="https://github.com/AlexJoaquimPereira/alexjoaquimpereira.github.io" target="_blank" rel="noopener noreferrer">View source<span aria-hidden="true">↗</span><span class="visually-hidden"> (opens in a new tab)</span></a>
       </p>
       <nav class="footer-nav" aria-label="Footer">
-        <a href="../index.html#about">About</a>
-        <a href="../index.html#projects">Projects</a>
-        <a href="../index.html#writing">Writing</a>
-        <a href="../index.html#skills">Skills</a>
-        <a href="../index.html#contact">Contact</a>
+        <a href="/#about">About</a>
+        <a href="/#projects">Projects</a>
+        <a href="/#writing">Writing</a>
+        <a href="/#skills">Skills</a>
+        <a href="/#contact">Contact</a>
       </nav>
     </div>
   </footer>
 
-  <script src="../js/main.js" defer></script>
+  <script src="/js/main.js" defer></script>
 </body>
 </html>

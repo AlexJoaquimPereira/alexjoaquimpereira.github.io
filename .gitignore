@@ -1,8 +1,0 @@
-# Local editor/tooling artifacts
-.telemetry/
-
-# OS
-.DS_Store
-
-# Logs
-*.log
