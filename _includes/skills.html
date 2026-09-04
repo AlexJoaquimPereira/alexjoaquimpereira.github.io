@@ -1,0 +1,29 @@
+{% assign person = site.data.profile %}
+<section class="section" id="skills" aria-labelledby="skills-title">
+  <div class="container">
+    {% include section-head.html num="04" eyebrow="Skills" title="Languages & tools" %}
+
+    <div class="skills-grid is-three-col" data-reveal-group>
+      <div class="card skill-group" data-reveal>
+        <h3>Languages</h3>
+        <ul class="tag-list">
+          {% for item in person.skills.languages %}<li class="tag">{{ item }}</li>{% endfor %}
+        </ul>
+      </div>
+
+      <div class="card skill-group" data-reveal>
+        <h3>Web</h3>
+        <ul class="tag-list">
+          {% for item in person.skills.web %}<li class="tag">{{ item }}</li>{% endfor %}
+        </ul>
+      </div>
+
+      <div class="card skill-group" data-reveal>
+        <h3>Interests</h3>
+        <ul class="tag-list">
+          {% for item in person.skills.interests %}<li class="tag">{{ item }}</li>{% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
