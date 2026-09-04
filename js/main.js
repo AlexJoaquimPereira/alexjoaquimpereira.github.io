@@ -63,7 +63,12 @@
     sections.forEach(function (s) { spy.observe(s); });
   }
 
-  /* ----- Scroll reveals (staggered) -----
+  /* ----- Scroll reveals (staggered, replayable) -----
+     Elements animate in when they enter the viewport and reset once they
+     leave it, so the reveal replays on every re-entry. Two observers keep
+     the play/reset boundaries apart: play as soon as the element is 12%
+     visible, reset only after it has fully left the viewport (plus a 12%
+     buffer) so nothing flickers at the edges.
      Reduced-motion users and browsers without IO see everything at once. */
   var revealables = Array.prototype.slice.call(document.querySelectorAll("[data-reveal]"));
 
@@ -80,19 +85,28 @@
       }
     });
 
-    var revealer = new IntersectionObserver(
+    var revealerIn = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-revealed");
-            revealer.unobserve(entry.target);
-          }
+          if (entry.isIntersecting) entry.target.classList.add("is-revealed");
         });
       },
       { threshold: 0.12, rootMargin: "0px 0px -5% 0px" }
     );
 
-    revealables.forEach(function (el) { revealer.observe(el); });
+    var revealerOut = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) entry.target.classList.remove("is-revealed");
+        });
+      },
+      { threshold: 0, rootMargin: "12% 0px 12% 0px" }
+    );
+
+    revealables.forEach(function (el) {
+      revealerIn.observe(el);
+      revealerOut.observe(el);
+    });
   } else {
     revealAll();
   }
