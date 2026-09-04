@@ -1,0 +1,35 @@
+{% assign person = site.data.profile %}
+<section class="hero" id="top">
+  <div class="container hero-inner">
+
+    <!-- Photo first in DOM: appears first on mobile; desktop grid places it on the right -->
+    <figure class="hero-media" data-load>
+      {% if person.image %}
+        {% assign hero_photo = site.static_files | where_exp: "f", "f.path == person.image" | first %}
+        {% if hero_photo %}
+          <img class="hero-photo" src="{{ person.image | relative_url }}" alt="{{ person.image_alt }}" width="480" height="600" />
+        {% else %}
+          <div class="placeholder hero-photo-slot" role="img" aria-label="Placeholder for {{ person.name }}'s profile photo">[PLACEHOLDER: PROFILE PHOTO]</div>
+        {% endif %}
+      {% endif %}
+    </figure>
+
+    <div class="hero-content">
+      <h1 data-load style="--d: 70ms">{{ person.name }}</h1>
+      <p class="hero-intro" data-load style="--d: 140ms">{{ person.hero.introduction | markdownify | remove: '<p>' | remove: '</p>' | strip }}</p>
+
+      <ul class="hero-facts" aria-label="Quick facts" data-load style="--d: 210ms">
+        {% for fact in person.hero.facts %}
+        <li>{{ fact }}</li>
+        {% endfor %}
+      </ul>
+
+      <div class="cta-row" data-load style="--d: 280ms">
+        {% for action in person.hero.actions %}
+        <a class="btn{% unless action.primary %} btn-ghost{% endunless %}" href="{{ action.url | relative_url }}">{{ action.label }}</a>
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+</section>
