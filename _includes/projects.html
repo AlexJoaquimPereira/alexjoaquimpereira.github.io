@@ -1,46 +1,62 @@
 {% assign person = site.data.profile %}
+{% assign gh = person.social.github %}
 <section class="section" id="projects" aria-labelledby="projects-title">
   <div class="container">
-    {% assign gh = person.social.github %}
-    {% capture projects_desc %}I have a few app and web based projects planned. Featured work will be listed here as it takes shape — in the meantime, my public code lives on [GitHub]({{ gh.url }}).{% endcapture %}
-    {% include section-head.html num="02" eyebrow="Projects" title="Things I'm building" desc=projects_desc %}
+    {% capture projects_desc %}Course and personal work, straight from my [GitHub]({{ gh.url }}). Featured work will grow here as projects take shape.{% endcapture %}
+    {% include section-head.html num="02" eyebrow="Projects" title="Things I've built" desc=projects_desc %}
 
     {% assign projects = site.data.projects %}
     {% if projects and projects != empty %}
-    <div class="project-grid" data-reveal-group>
-      {% for project in projects %}
-      <article class="card project-card" data-reveal>
-        <header>
-          <h3>{{ project.title }}</h3>
-          {% if project.sample %}<span class="badge">Sample</span>{% endif %}
-        </header>
+      {% assign featured = projects | where: "featured", true | first %}
+      {% assign supporting = projects | where_exp: "p", "p.featured != true" %}
 
-        {% if project.image %}
-          {% assign proj_img = site.static_files | where_exp: "f", "f.path == project.image" | first %}
+      {% if featured %}
+      <article class="project-featured" data-reveal>
+        {% if featured.image %}
+          {% assign proj_img = site.static_files | where_exp: "f", "f.path == featured.image" | first %}
           {% if proj_img %}
-          <img class="project-image" src="{{ project.image | relative_url }}" alt="Screenshot of {{ project.title }}" width="960" height="640" loading="lazy" />
-          {% else %}
-          <div class="placeholder" role="img" aria-label="Placeholder for a project screenshot">[PLACEHOLDER: PROJECT IMAGE]</div>
+          <img class="project-image" src="{{ featured.image | relative_url }}" alt="Screenshot of {{ featured.title }}" width="960" height="640" loading="lazy" />
           {% endif %}
         {% endif %}
-
-        <p>{{ project.description }}</p>
-
-        {% if project.technologies %}
+        <h3>{{ featured.title }}</h3>
+        <p>{{ featured.description }}</p>
+        {% if featured.technologies %}
         <ul class="project-tags">
-          {% for tech in project.technologies %}<li>{{ tech }}</li>{% endfor %}
+          {% for tech in featured.technologies %}<li>{{ tech }}</li>{% endfor %}
         </ul>
         {% endif %}
-
-        {% if project.github or project.live %}
+        {% if featured.github or featured.live %}
         <div class="project-links">
-          {% if project.github %}<a href="{{ project.github }}" target="_blank" rel="noopener noreferrer">GitHub<span aria-hidden="true">↗</span><span class="visually-hidden"> (opens in a new tab)</span></a>{% endif %}
-          {% if project.live %}<a href="{{ project.live }}" target="_blank" rel="noopener noreferrer">Live demo<span aria-hidden="true">↗</span><span class="visually-hidden"> (opens in a new tab)</span></a>{% endif %}
+          {% if featured.github %}<a href="{{ featured.github }}" target="_blank" rel="noopener noreferrer">GitHub<span aria-hidden="true">↗</span><span class="visually-hidden"> (opens in a new tab)</span></a>{% endif %}
+          {% if featured.live %}<a href="{{ featured.live }}" target="_blank" rel="noopener noreferrer">Live demo<span aria-hidden="true">↗</span><span class="visually-hidden"> (opens in a new tab)</span></a>{% endif %}
         </div>
         {% endif %}
       </article>
-      {% endfor %}
-    </div>
+      {% endif %}
+
+      {% if supporting.size > 0 %}
+      <ul class="project-rows" data-reveal-group>
+        {% for project in supporting %}
+        <li class="project-row" data-reveal>
+          <div class="project-row-head">
+            <h4>{{ project.title }}</h4>
+            {% if project.technologies %}
+            <ul class="project-tags">
+              {% for tech in project.technologies %}<li>{{ tech }}</li>{% endfor %}
+            </ul>
+            {% endif %}
+          </div>
+          <p>{{ project.description }}</p>
+          {% if project.github or project.live %}
+          <div class="project-links">
+            {% if project.github %}<a href="{{ project.github }}" target="_blank" rel="noopener noreferrer">GitHub<span aria-hidden="true">↗</span><span class="visually-hidden"> (opens in a new tab)</span></a>{% endif %}
+            {% if project.live %}<a href="{{ project.live }}" target="_blank" rel="noopener noreferrer">Live demo<span aria-hidden="true">↗</span><span class="visually-hidden"> (opens in a new tab)</span></a>{% endif %}
+          </div>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
     {% else %}
     <div class="card empty-state" data-reveal>
       <p>
