@@ -17,4 +17,14 @@
     {% for tag in post.tags %}<li class="tag">{{ tag }}</li>{% endfor %}
   </ul>
   {% endif %}
+  {% comment %}
+    Future Substack integration: only renders when substack.enabled is true
+    in _data/profile.yml AND the post carries the configured shared_tag.
+  {% endcomment %}
+  {% assign sub = site.data.profile.substack %}
+  {% if sub and sub.enabled and sub.url and sub.shared_tag and post.tags contains sub.shared_tag %}
+  <p class="substack-link-row">
+    <a class="substack-link" href="{{ sub.url }}" target="_blank" rel="noopener noreferrer">{{ sub.label | default: "Also on Substack" }}<span aria-hidden="true">↗</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+  </p>
+  {% endif %}
 </article>
