@@ -1,72 +1,98 @@
 # alexjoaquimpereira.github.io
 
-Personal website of Alex Joaquim Pereira — a plain static site (HTML + CSS + a
-little vanilla JS). No framework, no build step, no dependencies.
+Personal website of Alex Joaquim Pereira — a Jekyll static site deployed on
+GitHub Pages. Content lives in data files and Markdown; the templates render
+everything.
 
 **Live at:** https://alexjoaquimpereira.github.io/
 
-## Project structure
+## Architecture
 
 ```
-├── index.html              Home page (About, Projects, Writing, Skills, Contact)
-├── 404.html                Custom not-found page (served by GitHub Pages)
-├── articles/
-│   ├── index.html          All-articles listing
-│   ├── _template.html      Copy-paste skeleton for new articles (do not link to it)
-│   └── learning-in-small-projects.html   Sample article — replace with real writing
-├── css/style.css           Entire design system (light + dark theme)
-├── js/main.js              Progressive enhancements (theme toggle, scrollspy, form)
-├── assets/favicon.svg      "AP" monogram favicon
-└── .github/workflows/deploy.yaml   Deploys to GitHub Pages on push to master
+├── _config.yml             Jekyll settings (URL, permalinks)
+├── _data/profile.yml       ALL personal data: name, education, hero, about,
+│                           skills, social links, résumé, contact, GitHub cards
+├── _data/projects.yml      Project cards (one YAML entry per project)
+├── _posts/                 Articles — one Markdown file per post
+├── _layouts/               default (shell), post (article reading page)
+├── _includes/              hero, about, projects, writing, skills, github,
+│                           contact, article-card, reading-time, section-head
+├── articles/index.html     All-articles listing (auto-generated from _posts)
+├── index.html              Homepage (composes the includes)
+├── 404.html                Custom not-found page
+├── css/style.css           Design system (light + dark, motion, responsive)
+├── js/main.js              Theme, reveals, parallax, stats fallback, form
+└── assets/
+    ├── favicon.svg
+    └── images/
+        ├── profile.jpg     ← drop your photo here (4:5 portrait works best)
+        ├── og-image.png    ← social preview (1200×630, then uncomment in head)
+        ├── projects/       ← project screenshots
+        └── articles/       ← article cover images
 ```
 
-## Editing content
+## Common tasks
 
-All content lives directly in the HTML — open the file, find the section, edit
-the text. Search for `[PLACEHOLDER` to find everything meant to be replaced:
+**Edit personal info** → `_data/profile.yml` (name, education, skills, links,
+hero copy, about paragraphs). Every section of the site updates from it.
 
-- **Projects** — `index.html`, `#projects` section. Copy the sample
-  `<article class="card project-card">` block and edit it.
-- **Résumé** — the "View résumé" button in `#about` currently points to a
-  Canva link. To use a PDF instead: put it at `assets/resume.pdf` and change
-  the link's `href` to `assets/resume.pdf`.
-- **Email** — the contact form goes through Formspree. To publish your email
-  address too, add a row to the "Elsewhere" list in `#contact` (an example is
-  in the HTML comment above the form).
-- **Social preview image** — add `assets/og-image.png` (1200×630) and
-  uncomment the `og:image` meta tag in `index.html`.
+**Add a project** → append an entry to `_data/projects.yml`:
 
-## Adding a new article
+```yaml
+- title: "My project"
+  description: "What it does, in one or two sentences."
+  technologies: ["Python", "JavaScript"]
+  github: "https://github.com/you/repo"
+  live: "https://example.com"          # optional
+  image: "/assets/images/projects/my-project.jpg"  # optional
+```
 
-1. Copy `articles/_template.html` to `articles/your-slug.html`
-   (lowercase-with-hyphens). Fill in the title, description, canonical URL,
-   date, and body. Delete the how-to comment at the top.
-2. In `articles/index.html`, copy the existing `<article class="article-item">`
-   block to the top of the list and update it (title, date, summary, tags,
-   link).
-3. Do the same in the Writing section of `index.html` if you want it featured
-   on the homepage.
-4. Commit and push. That's it — there is no build step.
+**Add an article** → create `_posts/YYYY-MM-DD-my-title.md`:
 
-Estimated reading time: word count ÷ 200, rounded up.
+```markdown
+---
+layout: post
+title: "My article title"
+description: "One-sentence summary."
+date: YYYY-MM-DD
+tags:
+  - Learning
+cover: "/assets/images/articles/my-cover.jpg"   # optional
+---
+
+Your article in **Markdown**.
+```
+
+Push, and it appears in the Writing section and `/articles/` automatically
+(URL: `/articles/my-title/`). Reading time is estimated automatically.
+Do not fabricate content — an honest empty state beats a fake entry.
+
+**Profile photo** → add `assets/images/profile.jpg`. The hero picks it up
+automatically (placeholder shows until the file exists).
+
+**Résumé** → currently a Canva link in `_data/profile.yml`. To use a PDF:
+set `resume.url: "/assets/resume.pdf"` and `resume.external: false`, then
+add the file.
+
+## Design notes
+
+- Light/dark theme: follows the system until the visitor toggles; saved in
+  `localStorage`; palette lives at the top of `css/style.css`.
+- Motion: CSS keyframes + IntersectionObserver, all gated behind
+  `prefers-reduced-motion: reduce` and a `js` class (content is never hidden
+  when JS is off).
+- GitHub stat cards are third-party images (github-readme-stats). If the
+  service fails, a clean fallback with a profile link replaces them.
+
+## Local preview
+
+```sh
+bundle install
+bundle exec jekyll serve     # http://localhost:4000
+```
 
 ## Deploying
 
-`git push` to `master` is all it takes. The GitHub Action
-(`.github/workflows/deploy.yaml`) publishes the tracked files to the
-`gh-pages` branch, which GitHub Pages serves. You can also trigger it
-manually from the repository's *Actions* tab (*Deploy to GitHub Pages →
-Run workflow*).
-
-To preview locally before pushing:
-
-```sh
-python3 -m http.server 8000
-# then open http://localhost:8000
-```
-
-## Theme
-
-Light and dark mode both ship by default. The site follows the system
-preference until the visitor uses the toggle; the choice is saved in
-`localStorage`. Colors are defined once at the top of `css/style.css`.
+Push to `master`. The GitHub Action (`.github/workflows/deploy.yaml`) builds
+the Jekyll site and publishes the output to the `gh-pages` branch, which
+GitHub Pages serves. Trigger manually anytime from the repo's *Actions* tab.
