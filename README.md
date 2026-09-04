@@ -87,8 +87,8 @@ add the file.
 ## Local preview
 
 ```sh
-bundle install
-bundle exec jekyll serve     # http://localhost:4000
+gem install jekyll -v 4.4.1 --no-document
+jekyll serve               # http://localhost:4000
 ```
 
 ## Deploying
