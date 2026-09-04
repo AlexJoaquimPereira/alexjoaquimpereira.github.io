@@ -1,0 +1,35 @@
+# Jekyll configuration — GitHub Pages compatible
+title: Alex Joaquim Pereira
+description: >-
+  Computer Engineering student at Goa College of Engineering, exploring
+  Python and JavaScript, UI/UX, and competitive programming.
+url: "https://alexjoaquimpereira.github.io"
+baseurl: ""
+
+lang: en
+
+markdown: kramdown
+kramdown:
+  input: GFM
+
+include:
+  - .nojekyll
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - bundle
+  - vendor
+  - .github
+  - .telemetry
+  - .gitignore
+  - scripts
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: post
+      permalink: /articles/:title/
