@@ -3,7 +3,7 @@
 <section class="section" id="projects" aria-labelledby="projects-title">
   <div class="container">
     {% capture projects_desc %}Course and personal work, straight from my [GitHub]({{ gh.url }}). Featured work will grow here as projects take shape.{% endcapture %}
-    {% include section-head.html num="02" eyebrow="Projects" title="Things I've built" desc=projects_desc %}
+    {% include section-head.html num="02" eyebrow="Projects" micro="PROJECT ARCHIVE" title="Things I've built" desc=projects_desc %}
 
     {% assign projects = site.data.projects %}
     {% if projects and projects != empty %}
