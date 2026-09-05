@@ -24,6 +24,7 @@
   --earth-soft: #EBEFE6;
   --gold: #8A6A24;
   --gold-soft: #F4EDD8;
+  --warning: #A8562A;
 
   --shadow: 0 1px 2px rgba(36, 19, 31, 0.05);
 
@@ -71,6 +72,7 @@
   --earth-soft: #242A20;
   --gold: #D7B55B;
   --gold-soft: #302A1B;
+  --warning: #E0A35C;
 
   --shadow: none;
 }
@@ -344,6 +346,7 @@ pre code {
 }
 
 .section-head {
+  position: relative;
   margin-bottom: var(--sp-6);
 }
 
@@ -365,12 +368,51 @@ pre code {
   font-variant-numeric: tabular-nums;
 }
 
+.eyebrow-sep {
+  color: var(--border-strong);
+  font-weight: 400;
+}
+
 .section-eyebrow::after {
   content: "";
   height: 1px;
   width: 2.5rem;
   background: var(--accent);
   opacity: 0.45;
+}
+
+/* Tiny technical label, aligned right of the eyebrow row (desktop only) */
+.eyebrow-micro {
+  display: none;
+}
+
+@media (min-width: 40em) {
+  .eyebrow-micro {
+    display: inline-block;
+    position: absolute;
+    top: 0.28rem;
+    right: 1.5rem;
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+}
+
+/* Registration mark: tiny crosshair at the section-head corner (desktop only) */
+@media (min-width: 40em) {
+  .section-head::after {
+    content: "";
+    position: absolute;
+    top: 0.3rem;
+    right: 0;
+    width: 11px;
+    height: 11px;
+    background:
+      linear-gradient(var(--border-strong), var(--border-strong)) center / 1px 100% no-repeat,
+      linear-gradient(var(--border-strong), var(--border-strong)) center / 100% 1px no-repeat;
+  }
 }
 
 .section-head h1,
@@ -605,12 +647,18 @@ a.card-link:focus-visible {
 }
 
 .fact-list dt {
-  font-size: 0.78rem;
+  font-size: 0.68rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.16em;
   color: var(--muted);
   margin-bottom: var(--sp-1);
+}
+
+.fact-list dt::before {
+  content: "// ";
+  color: var(--accent-alt);
+  font-weight: 600;
 }
 
 .fact-list dd {
@@ -663,6 +711,7 @@ a.card-link:focus-visible {
    Editorial showcase: one featured project, supporting rows.
    Projects without images are the default, fully-supported state. */
 .project-featured {
+  position: relative;
   border: 1px solid var(--border);
   border-left: 3px solid var(--accent);
   border-radius: var(--radius);
@@ -753,12 +802,13 @@ a.card-link:focus-visible {
 
 .badge {
   display: inline-block;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.07em;
-  color: var(--muted);
+  color: var(--warning);
   border: 1px solid var(--border-strong);
+  border: 1px solid color-mix(in srgb, var(--warning) 40%, transparent);
   border-radius: var(--radius-sm);
   padding: 0.1rem 0.5rem;
   white-space: nowrap;
@@ -796,8 +846,10 @@ a.card-link:focus-visible {
   flex-wrap: wrap;
   align-items: center;
   gap: var(--sp-2) var(--sp-3);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
   margin-bottom: var(--sp-2);
 }
 
@@ -1045,6 +1097,63 @@ a.card-link:focus-visible {
 
 [data-theme="dark"] .form-status[data-status="error"] {
   color: #f87171;
+}
+
+/* ---------- Decorative technical details ----------
+   Registration marks, micro labels, one faint scanline motif.
+   All purely decorative: no layout impact, no content claims. */
+
+.status-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--earth);
+  margin-right: 0.55rem;
+  vertical-align: 0.08em;
+}
+
+/* Faint horizontal scanlines behind the hero (desktop only) */
+@media (min-width: 56em) {
+  .hero {
+    position: relative;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent 0 39px,
+      var(--border) 39px 40px
+    );
+    opacity: 0.35;
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 25%, #000 75%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 25%, #000 75%, transparent);
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+/* Corner tick on the featured project card (desktop only) */
+@media (min-width: 40em) {
+  .project-featured::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    width: 13px;
+    height: 13px;
+    border-top: 1px solid var(--accent);
+    border-right: 1px solid var(--accent);
+    border-top-right-radius: var(--radius);
+  }
 }
 
 /* ---------- Footer ---------- */
