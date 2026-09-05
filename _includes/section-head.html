@@ -1,5 +1,8 @@
 <div class="section-head" data-reveal>
-  <span class="section-eyebrow">{% if include.num %}<span class="eyebrow-num" aria-hidden="true">{{ include.num }}</span>{% endif %}{{ include.eyebrow }}</span>
+  <span class="section-eyebrow">
+    {% if include.num %}<span class="eyebrow-num" aria-hidden="true">{{ include.num }}</span><span class="eyebrow-sep" aria-hidden="true">/</span>{% endif %}<span class="eyebrow-text">{{ include.eyebrow }}</span>
+  </span>
+  {% if include.micro %}<span class="eyebrow-micro" aria-hidden="true">{{ include.micro }}</span>{% endif %}
   {% if include.level == 'h1' %}
   <h1>{{ include.title }}</h1>
   {% else %}
