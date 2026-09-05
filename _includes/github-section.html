@@ -3,7 +3,7 @@
 <section class="section" id="github" aria-labelledby="github-title">
   <div class="container">
     {% capture gh_desc %}A small snapshot of what I've been working on lately, straight from my [GitHub profile]({{ person.social.github.url }}).{% endcapture %}
-    {% include section-head.html num="03" eyebrow="GitHub" title="GitHub activity" desc=gh_desc %}
+    {% include section-head.html num="03" eyebrow="Activity" micro=person.social.github.handle title="GitHub activity" desc=gh_desc %}
 
     <div class="github-grid" data-reveal-group>
       {% include github-card.html
