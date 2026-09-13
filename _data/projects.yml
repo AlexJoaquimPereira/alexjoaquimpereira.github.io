@@ -27,18 +27,27 @@
   technologies: ["JavaScript", "Agentic AI"]
   github: "https://github.com/AlexJoaquimPereira/opencode-agent-config"
 
+- title: "OpenCode Cache Engine"
+  featured: true
+  description: >-
+    Provider-aware prompt-cache optimization and telemetry for OpenCode.
+    Works with DeepSeek V4.1 Flash, GLM-5.3-Flash, GPT-5.6 Luna models.
+  technologies: ["JavaScript", "TypeScript"]
+  live: "https://www.npmjs.com/package/opencode-cache-engine"
+  github: "https://github.com/AlexJoaquimPereira/opencode-cache-engine"
+
 - title: "FortiPrompt-RedTeam"
   description: >-
     Automated adversarial prompt generation and synthetic dataset creation.
     Complements the core FortiPrompt malicious prompt detection component.
-  technologies: ["TensorFlow"]
+  technologies: ["PyTorch"]
   github: "https://github.com/AlexJoaquimPereira/FortiPrompt-redteam"
 
 - title: "FortiPrompt Evaluation System"
   description: >-
     A simplified red-team evaluation pipeline for LLMs. Used to test and
     evaluate prompts and responses within FortiPrompt system.
-  technologies: ["langgraph"]
+  technologies: ["Python", "llama.cpp", "transformers"]
   github: "https://github.com/AlexJoaquimPereira/FortiPrompt-redteam-evaluator-v3"
 
 - title: "Social Media Application (DBMQP, Sem 5)"
