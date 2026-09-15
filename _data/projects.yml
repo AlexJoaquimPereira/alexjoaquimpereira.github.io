@@ -24,7 +24,7 @@
     and GPT-5.6 Luna as backend models; chosen specifically to maximise
     programming tasks completed per dollar.
     In progress.
-  technologies: ["JavaScript", "Agentic AI"]
+  technologies: ["JavaScript""]
   github: "https://github.com/AlexJoaquimPereira/opencode-agent-config"
 
 - title: "OpenCode Cache Engine"
