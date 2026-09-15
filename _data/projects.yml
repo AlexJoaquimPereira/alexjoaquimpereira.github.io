@@ -24,11 +24,11 @@
     and GPT-5.6 Luna as backend models; chosen specifically to maximise
     programming tasks completed per dollar.
     In progress.
-  technologies: ["JavaScript""]
+  technologies: ["JavaScript"]
   github: "https://github.com/AlexJoaquimPereira/opencode-agent-config"
 
 - title: "OpenCode Cache Engine"
-  featured: true
+  #featured: true
   description: >-
     Provider-aware prompt-cache optimization and telemetry for OpenCode.
     Works with DeepSeek V4.1 Flash, GLM-5.3-Flash, GPT-5.6 Luna models.
