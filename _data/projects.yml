@@ -29,7 +29,7 @@
 - title: "OpenCode Agent Config"
   #featured: true
   description: >-
-    OpenCode agents configured around DeepSeek V4 Flash 0731, GLM-5.3-Flash
+    OpenCode agents configured around DeepSeek V4.1 Flash, GLM-5.3-Flash
     and GPT-5.6 Luna as backend models; chosen specifically to maximise
     programming tasks completed per dollar.
     In progress.
