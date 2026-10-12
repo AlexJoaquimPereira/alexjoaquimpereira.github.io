@@ -30,7 +30,7 @@
   #featured: true
   description: >-
     OpenCode agents configured around DeepSeek V4.1 Flash, GLM-5.3-Flash
-    and GPT-5.6 Luna as backend models; chosen specifically to maximise
+    and GPT-5.6 Luna as backend models; chosen specifically to maximize
     programming tasks completed per dollar.
     In progress.
   technologies: ["JavaScript"]
