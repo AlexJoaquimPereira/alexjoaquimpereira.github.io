@@ -21,7 +21,7 @@
   featured: true
   description: >-
     Provider-aware prompt-cache optimization and telemetry for OpenCode.
-    Works with DeepSeek, GPT, Claude, Gemini, GLM, MiMo, and other families.
+    Works with DeepSeek, GPT, Claude, Gemini, GLM, MiMo, and other major families.
   technologies: ["JavaScript", "TypeScript"]
   live: "https://www.npmjs.com/package/opencode-cache-engine"
   github: "https://github.com/AlexJoaquimPereira/opencode-cache-engine"
