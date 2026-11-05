@@ -26,6 +26,14 @@
   live: "https://www.npmjs.com/package/opencode-cache-engine"
   github: "https://github.com/AlexJoaquimPereira/opencode-cache-engine"
 
+- title: "Povitr Pustok"
+  #featured: true
+  description: >-
+    An offline-first Android reader for a 73-book Konkani Catholic Bible corpus,
+    built with Kotlin, Jetpack Compose and Material 3.
+  technologies: ["Kotlin", "Jetpack Compose"]
+  github: "https://github.com/AlexJoaquimPereira/PovitrPustok"
+
 - title: "OpenCode Agent Config"
   #featured: true
   description: >-
