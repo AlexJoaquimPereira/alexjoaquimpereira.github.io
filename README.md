@@ -52,6 +52,38 @@ One project may be marked `featured: true` (renders as the large showcase
 card, and is the only entry that displays an image). Everything else renders
 as a supporting row — image-less by design, no placeholder art needed.
 
+**Add an open-source contribution** → the Open-source Contributions subsection
+renders entirely from `_data/contributions.yml` via
+`_includes/open-source-contributions.html`, so maintaining it means editing
+that one file. It appears only when `repositories:` is non-empty, so it never
+renders as an empty section.
+
+1. **Adding an upstream repository** — append an entry under `repositories:`
+   with `name`, `full_name` (the `owner/repo` identifier), `description`
+   (quoted from the upstream repository — do not write your own), `url`,
+   `license`, `merged_pr_count`, `prs_url` and `verified_at`. Add
+   `featured: true` to at most one repository with substantial contributions;
+   it renders as a card, the rest render as compact rows.
+2. **Adding a newly merged PR** — append to that repository's
+   `pull_requests:` list with `number`, `title` (the real PR title), `url`,
+   `merged_at` and an optional one-sentence `summary`. Omit `summary` when the
+   PR's purpose isn't clear — the title is then used on its own.
+3. **Updating the merged count** — `merged_pr_count` is the total number of
+   merged PRs by this account in that repository, **not** the number of
+   entries listed beneath it. Read it from
+   `https://api.github.com/search/issues?q=repo:OWNER/REPO+author:AlexJoaquimPereira+is:pr+is:merged&per_page=1`
+   (`total_count`) and bump `verified_at` in the same edit.
+4. **Checking the licence** — open the repository's `LICENSE` / `COPYING`
+   file (or its GitHub licence badge) and record the SPDX identifier (`MIT`,
+   `Apache-2.0`, `BSD-3-Clause`, …). A repository with neither a licence file
+   nor licence metadata is not open source: leave it out, or list it
+   deliberately without a `license:` key so no licence chip is rendered (as
+   with `afriemann/opencode-redact`).
+5. **Selecting PRs for the homepage** — 3–4 representative entries for a large
+   repository (pick a range of areas rather than several fixes in one file)
+   and 1–2 for a small one. Every listed PR must be authored by this account
+   and genuinely merged upstream.
+
 **Activate the Substack integration** (when it exists) → in
 `_data/profile.yml`, uncomment the `substack:` block, set `enabled: true`
 and your real URL. Posts tagged with `shared_tag` (default `tech`) then show
@@ -92,9 +124,6 @@ add the file.
   (`--accent`), amaranth (`--accent-alt`) for hover states, and rare gold
   (`--gold`) / botanical (`--earth`) details. All tokens live at the top of
   `css/style.css`; both themes are hand-tuned, not inverted.
-
-## Design notes
-
 - Light/dark theme: follows the system until the visitor toggles; saved in
   `localStorage`; palette lives at the top of `css/style.css`.
 - Motion: CSS keyframes + IntersectionObserver. Reveals **replay** — they
