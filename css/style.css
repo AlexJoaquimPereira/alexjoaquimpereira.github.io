@@ -814,6 +814,213 @@ a.card-link:focus-visible {
   white-space: nowrap;
 }
 
+/* ---------- Open-source contributions ----------
+   Subsection inside Projects: repositories as groups, merged PRs as rows.
+   Deliberately quieter than the personal project showcase above it. */
+.os-block {
+  margin-top: var(--sp-7);
+}
+
+.os-block .section-head h3 {
+  font-size: 1.35rem;
+  margin-bottom: var(--sp-2);
+}
+
+.os-block .section-head p {
+  max-width: 56ch;
+}
+
+.os-repos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.os-repo {
+  border-top: 1px solid var(--border);
+  padding-block: var(--sp-5);
+}
+
+.os-repo--featured {
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  padding: var(--sp-4);
+}
+
+.os-repo-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-1) var(--sp-3);
+}
+
+.os-repo-owner {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.os-repo-name {
+  font-size: 1.15rem;
+  margin: 0.1rem 0 0;
+  font-weight: 650;
+}
+
+.os-license {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: 0.12rem 0.5rem;
+  white-space: nowrap;
+  margin-left: auto;
+}
+
+.os-repo-desc {
+  margin: var(--sp-2) 0 0;
+  color: var(--muted);
+  max-width: 66ch;
+}
+
+.os-repo-count {
+  margin: var(--sp-2) 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.os-repo-count strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.os-prs {
+  list-style: none;
+  margin: var(--sp-4) 0 0;
+  padding: 0;
+}
+
+.os-pr {
+  display: grid;
+  grid-template-columns: 1.6rem minmax(0, 1fr);
+  gap: var(--sp-3);
+  border-top: 1px solid var(--border);
+  padding-block: var(--sp-3);
+}
+
+.os-pr:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.os-pr-num {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--gold);
+  padding-top: 0.2rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.os-pr-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.os-pr-title a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.os-pr-title a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.os-ext {
+  display: inline;
+  margin-left: 0.3rem;
+  font-size: 0.8em;
+  color: var(--muted);
+}
+
+.os-pr-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0.3rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.os-pr-sep {
+  color: var(--border-strong);
+}
+
+.os-status {
+  color: var(--earth);
+  font-weight: 600;
+}
+
+.os-status::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  margin-right: 0.38rem;
+  vertical-align: 0.08em;
+}
+
+.os-pr-summary {
+  margin: 0.4rem 0 0;
+  font-size: 0.92rem;
+  color: var(--muted);
+  max-width: 68ch;
+}
+
+.os-repo-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2) var(--sp-4);
+  margin-top: var(--sp-3);
+  font-size: 0.85rem;
+}
+
+.os-repo-links a span[aria-hidden="true"] {
+  margin-left: 0.25rem;
+}
+
+.os-all {
+  margin: var(--sp-4) 0 0;
+}
+
+/* Compact-to-card spacing: the featured group sits below the project rows */
+.os-repo + .os-repo {
+  margin-top: 0;
+}
+
 /* ---------- Articles ---------- */
 .article-list {
   list-style: none;
@@ -1153,6 +1360,10 @@ a.card-link:focus-visible {
     border-top: 1px solid var(--accent);
     border-right: 1px solid var(--accent);
     border-top-right-radius: var(--radius);
+  }
+
+  .os-repo--featured {
+    padding: var(--sp-5);
   }
 }
 
