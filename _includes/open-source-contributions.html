@@ -1,0 +1,72 @@
+{% comment %}
+  Open-source contributions — merged pull requests into projects owned by
+  other people or organisations.
+
+  Rendered only when _data/contributions.yml has at least one repository,
+  so the section never appears empty. All content comes from that file;
+  nothing is hardcoded here.
+{% endcomment %}
+{% assign contribs = site.data.contributions %}
+{% if contribs and contribs.repositories and contribs.repositories.size > 0 %}
+<section class="os-block" id="open-source" aria-labelledby="open-source-title">
+  {% capture os_desc %}Selected contributions to open-source projects, from improvements and bug fixes to documentation and tooling.{% endcapture %}
+  {% include section-head.html level="h3" heading_id="open-source-title" eyebrow="Open source" micro="CONTRIBUTIONS" title="Beyond my own repositories." desc=os_desc %}
+
+  <ol class="os-repos" data-reveal-group>
+    {% for repo in contribs.repositories %}
+    <li class="os-repo{% if repo.featured %} os-repo--featured{% endif %}" data-reveal>
+      <div class="os-repo-head">
+        <div class="os-repo-id">
+          <p class="os-repo-owner">{{ repo.full_name }}</p>
+          <h4 class="os-repo-name">{{ repo.name }}</h4>
+        </div>
+        {% if repo.license %}<span class="os-license">{{ repo.license }}</span>{% endif %}
+      </div>
+
+      <p class="os-repo-desc">{{ repo.description }}</p>
+
+      <p class="os-repo-count">
+        <strong>{{ repo.merged_pr_count }}</strong>
+        {% if repo.merged_pr_count == 1 %}merged pull request{% else %}merged pull requests{% endif %}
+      </p>
+
+      {% if repo.pull_requests and repo.pull_requests.size > 0 %}
+      <ol class="os-prs">
+        {% for pr in repo.pull_requests %}
+        <li class="os-pr">
+          <span class="os-pr-num" aria-hidden="true">{{ forloop.index | prepend: "0" | slice: -2, 2 }}</span>
+          <div class="os-pr-main">
+            <h5 class="os-pr-title">
+              <a href="{{ pr.url }}" target="_blank" rel="noopener noreferrer">{{ pr.title }}<span class="os-ext" aria-hidden="true">↗</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+            </h5>
+            <p class="os-pr-meta">
+              <span class="os-pr-ref">#{{ pr.number }}</span>
+              <span class="os-pr-sep" aria-hidden="true">·</span>
+              <time datetime="{{ pr.merged_at }}">{{ pr.merged_at | date: "%d %b %Y" }}</time>
+              <span class="os-pr-sep" aria-hidden="true">·</span>
+              <span class="os-status">Merged</span>
+            </p>
+            {% if pr.summary %}<p class="os-pr-summary">{{ pr.summary }}</p>{% endif %}
+          </div>
+        </li>
+        {% endfor %}
+      </ol>
+      {% endif %}
+
+      <div class="os-repo-links">
+        {% if repo.prs_url %}
+        <a href="{{ repo.prs_url }}" target="_blank" rel="noopener noreferrer">All merged pull requests<span aria-hidden="true">↗</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+        {% endif %}
+        <a href="{{ repo.url }}" target="_blank" rel="noopener noreferrer">Explore repository<span aria-hidden="true">↗</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+      </div>
+    </li>
+    {% endfor %}
+  </ol>
+
+  {% if contribs.all_prs_url %}
+  <p class="os-all">
+    <a class="more-link" href="{{ contribs.all_prs_url }}" target="_blank" rel="noopener noreferrer">View all merged contributions<span aria-hidden="true"> →</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+  </p>
+  {% endif %}
+</section>
+{% endif %}
