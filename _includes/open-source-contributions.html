@@ -16,12 +16,10 @@
     {% for repo in contribs.repositories %}
     <li class="os-repo{% if repo.featured %} os-repo--featured{% endif %}" data-reveal>
       <div class="os-repo-head">
-        <div class="os-repo-id">
-          <p class="os-repo-owner">{{ repo.full_name }}</p>
-          <h4 class="os-repo-name">{{ repo.name }}</h4>
-        </div>
+        <p class="os-repo-owner">{{ repo.full_name }}</p>
         {% if repo.license %}<span class="os-license">{{ repo.license }}</span>{% endif %}
       </div>
+      <h4 class="os-repo-name">{{ repo.name }}</h4>
 
       <p class="os-repo-desc">{{ repo.description }}</p>
 
