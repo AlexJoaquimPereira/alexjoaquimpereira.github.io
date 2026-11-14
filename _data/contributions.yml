@@ -1,0 +1,132 @@
+# ============================================================
+# OPEN-SOURCE CONTRIBUTIONS — pull requests merged upstream.
+#
+# Only verified entries belong here. For every repository:
+#   * it must not be one of AlexJoaquimPereira's own repositories;
+#   * its licence must be checked before it is added — record it when one
+#     exists (LICENSE / COPYING file, or licence metadata reported by
+#     GitHub). Entries without a licence render no licence chip; see the
+#     note on afriemann/opencode-redact below.
+#   * merged_pr_count must be the total from the GitHub search
+#       author:AlexJoaquimPereira is:pr is:merged is:public
+#     filtered to that repository — not the number of PRs listed
+#     below (pull_requests is a curated subset for the homepage).
+#
+# Verification snapshot: 2026-11-14 — 61 merged PRs total, 53 upstream:
+#     storytold/craft-anything             45
+#     TeamConnectifyGec/ConnectiyFrontend   5
+#     afriemann/opencode-redact             1  (no licence file)
+#     JetBrains/swot                        1  (MIT — not shown)
+#     Aaditya-Salgaonkar/ConnectiFy         1  (no licence — not shown)
+#
+# Fields per repository:
+#   name              display name
+#   full_name         owner/repo, shown as the technical identifier
+#   description       factual, taken from the upstream repository
+#   url               repository URL
+#   license           SPDX identifier, verified against the repo
+#   merged_pr_count   total merged PRs by AlexJoaquimPereira
+#   prs_url           link to the full merged-PR search for that repo
+#   verified_at       date the numbers were last checked
+#   featured          optional — larger card treatment
+#   pull_requests     representative selection (3–4 for large repos)
+#
+# Fields per pull request:
+#   number, title, url, merged_at, summary (omit summary if the PR's
+#   purpose is unclear — the title alone is used then)
+# ============================================================
+
+# Section-level link: every merged public PR by this account.
+all_prs_url: "https://github.com/search?q=author%3AAlexJoaquimPereira+is%3Apr+is%3Amerged+is%3Apublic&type=pullrequests"
+
+repositories:
+  - name: "Craft Anything"
+    full_name: "storytold/craft-anything"
+    description: >-
+      Craft Anything: understand how any software works, and craft your own.
+    url: "https://github.com/storytold/craft-anything"
+    license: "Apache-2.0"
+    merged_pr_count: 45
+    prs_url: "https://github.com/storytold/craft-anything/pulls?q=is%3Apr+author%3AAlexJoaquimPereira+is%3Amerged"
+    verified_at: "2026-11-14"
+    featured: true
+    pull_requests:
+      - number: 1796
+        title: "Say how many report limitations were omitted"
+        url: "https://github.com/storytold/craft-anything/pull/1796"
+        merged_at: "2026-11-12"
+        summary: >-
+          Reports now state how many distinct limitations were omitted after
+          the first 30, in both the Markdown and HTML outputs.
+      - number: 1795
+        title: "Resolve and disclose application graph import facts"
+        url: "https://github.com/storytold/craft-anything/pull/1795"
+        merged_at: "2026-11-12"
+        summary: >-
+          The JavaScript application mapper resolves every retained import
+          instead of only the first 2,000, and discloses truncated module
+          facts as a partial-coverage limitation.
+      - number: 1792
+        title: "Report complete comparison row totals"
+        url: "https://github.com/storytold/craft-anything/pull/1792"
+        merged_at: "2026-11-12"
+        summary: >-
+          Comparison reports return complete added and removed totals and flag
+          rows that hit the 2,000-row cap, rather than reporting the cut
+          lengths as totals.
+      - number: 456
+        title: "C# operators keep their CLR names"
+        url: "https://github.com/storytold/craft-anything/pull/456"
+        merged_at: "2026-11-03"
+        summary: >-
+          The C# declaration scanner now names each operator by its CLR symbol
+          (op_Equality, op_Addition, …) instead of the literal name
+          “operator”, so reconstruction checks match .NET metadata.
+
+  - name: "ConnectiFy Frontend"
+    full_name: "TeamConnectifyGec/ConnectiyFrontend"
+    description: >-
+      ConnectiFy — a social networking app designed with the user at the
+      center.
+    url: "https://github.com/TeamConnectifyGec/ConnectiyFrontend"
+    license: "BSD-3-Clause"
+    merged_pr_count: 5
+    prs_url: "https://github.com/TeamConnectifyGec/ConnectiyFrontend/pulls?q=is%3Apr+author%3AAlexJoaquimPereira+is%3Amerged"
+    verified_at: "2026-11-14"
+    pull_requests:
+      - number: 7
+        title: "Added functions in post page"
+        url: "https://github.com/TeamConnectifyGec/ConnectiyFrontend/pull/7"
+        merged_at: "2024-10-21"
+        summary: >-
+          Extended the post screen (app/(home)/post.jsx) with additional
+          functions.
+      - number: 5
+        title: "Packages"
+        url: "https://github.com/TeamConnectifyGec/ConnectiyFrontend/pull/5"
+        merged_at: "2024-10-16"
+        summary: >-
+          Added a dependency to the frontend's package manifest and lockfile.
+
+  - name: "opencode-redact"
+    full_name: "afriemann/opencode-redact"
+    description: >-
+      opencode plugin: redact secrets from tool output before it reaches the
+      LLM.
+    url: "https://github.com/afriemann/opencode-redact"
+    # No licence: the repository has no LICENSE/COPYING file and no licence
+    # metadata, so no licence chip is rendered for this entry. Included at the
+    # site owner's request; it is a public upstream contribution, not a
+    # verified open-source project.
+    merged_pr_count: 1
+    prs_url: "https://github.com/afriemann/opencode-redact/pulls?q=is%3Apr+author%3AAlexJoaquimPereira+is%3Amerged"
+    verified_at: "2026-11-14"
+    pull_requests:
+      - number: 24
+        title: "Fix/tool error and contentpart redaction"
+        url: "https://github.com/afriemann/opencode-redact/pull/24"
+        merged_at: "2026-11-04"
+        summary: >-
+          Tightens redaction of tool-error output and non-text content parts
+          before they reach the model, with the request-payload and
+          tool-output specs updated alongside the implementation.
