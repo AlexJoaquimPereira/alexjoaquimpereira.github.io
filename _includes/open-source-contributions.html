@@ -23,9 +23,9 @@
 
       <p class="os-repo-desc">{{ repo.description }}</p>
 
-      <p class="os-repo-count">
-        <strong>{{ repo.merged_pr_count }}</strong>
-        {% if repo.merged_pr_count == 1 %}merged pull request{% else %}merged pull requests{% endif %}
+      <p class="os-repo-count" aria-live="polite">
+        <strong data-merged-pr-count data-contribution-repo="{{ repo.full_name | escape }}">{{ repo.merged_pr_count }}</strong>
+        <span data-merged-pr-noun>{% if repo.merged_pr_count == 1 %}merged pull request{% else %}merged pull requests{% endif %}</span>
       </p>
 
       {% if repo.pull_requests and repo.pull_requests.size > 0 %}
