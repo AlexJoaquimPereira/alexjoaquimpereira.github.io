@@ -137,6 +137,211 @@
 
   syncStatTheme();
 
+  /* ----- Open-source contributions: live merged-PR counts -----
+     Jekyll renders the build-time counts from _data/contributions.yml.
+     They are the permanent fallback: one refresh attempt replaces all of
+     them only after a complete, validated GitHub search response; any
+     failure leaves every build-time count untouched. */
+  var contributionCounts = Array.prototype.slice.call(
+    document.querySelectorAll("[data-contribution-repo][data-merged-pr-count]")
+  );
+
+  if (contributionCounts.length && window.fetch && window.AbortController) {
+    refreshContributionCounts(contributionCounts);
+  }
+
+  function refreshContributionCounts(countElements) {
+    var LOGIN = "AlexJoaquimPereira";
+    var ENDPOINT = "https://api.github.com/search/issues";
+    var QUERY = "author:" + LOGIN + " is:pr is:merged";
+    var PER_PAGE = 100;
+    var MAX_WINDOW = 1000;
+    var TIMEOUT = 10000;
+
+    /* Configured repositories come from the rendered markup, so the YAML
+       file stays the single source of truth and new entries need no JS. */
+    var configured = {};
+    countElements.forEach(function (el) {
+      var fullName = (el.getAttribute("data-contribution-repo") || "").trim();
+      if (!fullName) return;
+      configured[fullName.toLowerCase()] = { element: el, fullName: fullName };
+    });
+    if (!Object.keys(configured).length) return;
+
+    function reportRateLimit(response) {
+      if (!response.headers || typeof response.headers.get !== "function") return;
+      if (response.headers.get("X-RateLimit-Remaining") === "0") {
+        var reset = Number(response.headers.get("X-RateLimit-Reset"));
+        console.info(
+          "[contributions] GitHub search rate limit exhausted" +
+            (reset ? " until " + new Date(reset * 1000).toISOString() : "") +
+            "; keeping build-time counts."
+        );
+      }
+      var retryAfter = response.headers.get("Retry-After");
+      if (retryAfter) {
+        console.info("[contributions] GitHub asked to retry after " + retryAfter + "s; keeping build-time counts.");
+      }
+    }
+
+    function requestSearch(query, page, perPage, signal) {
+      var url = ENDPOINT + "?q=" + encodeURIComponent(query) + "&per_page=" + perPage;
+      if (page > 1) url += "&page=" + page;
+
+      return fetch(url, {
+        headers: { Accept: "application/vnd.github+json" },
+        credentials: "omit",
+        signal: signal
+      })
+        .then(function (response) {
+          reportRateLimit(response);
+          if (!response.ok) throw new Error("HTTP " + response.status);
+          return response.json();
+        })
+        .then(function (data) {
+          if (
+            !data ||
+            typeof data !== "object" ||
+            !Array.isArray(data.items) ||
+            typeof data.total_count !== "number" ||
+            !isFinite(data.total_count) ||
+            data.total_count < 0 ||
+            Math.floor(data.total_count) !== data.total_count ||
+            data.incomplete_results !== false
+          ) {
+            throw new Error("unexpected search response");
+          }
+          return data;
+        });
+    }
+
+    function readItem(item) {
+      if (!item || typeof item !== "object") throw new Error("unexpected search item");
+      if (!item.pull_request) return null;
+      if (
+        !item.user ||
+        typeof item.user.login !== "string" ||
+        typeof item.repository_url !== "string" ||
+        typeof item.number !== "number"
+      ) {
+        throw new Error("unexpected pull request item");
+      }
+      var marker = "/repos/";
+      var at = item.repository_url.indexOf(marker);
+      if (at === -1) throw new Error("unreadable repository_url");
+      var rest = item.repository_url.slice(at + marker.length).split(/[?#]/)[0].replace(/\/+$/, "");
+      var parts = rest.split("/");
+      if (parts.length !== 2 || !parts[0] || !parts[1]) throw new Error("unreadable repository_url");
+      return {
+        repo: (decodeURIComponent(parts[0]) + "/" + decodeURIComponent(parts[1])).toLowerCase(),
+        author: item.user.login.toLowerCase(),
+        number: item.number
+      };
+    }
+
+    function countItems(items) {
+      var counts = {};
+      var seen = {};
+      Object.keys(configured).forEach(function (key) { counts[key] = 0; });
+
+      items.forEach(function (item) {
+        var entry = readItem(item);
+        if (!entry || entry.author !== LOGIN.toLowerCase()) return;
+        if (!Object.prototype.hasOwnProperty.call(counts, entry.repo)) return;
+        var key = entry.repo + "#" + entry.number;
+        if (Object.prototype.hasOwnProperty.call(seen, key)) return;
+        seen[key] = true;
+        counts[entry.repo] += 1;
+      });
+
+      return counts;
+    }
+
+    async function collectGlobal(signal) {
+      var first = await requestSearch(QUERY, 1, PER_PAGE, signal);
+      /* Beyond the search window, per-repository totals are the only
+         reliable source, so hand over to the fallback collection. */
+      if (first.total_count > MAX_WINDOW) return null;
+
+      var total = first.total_count;
+      var items = first.items.slice();
+      var pages = Math.ceil(total / PER_PAGE);
+
+      for (var page = 2; page <= pages; page++) {
+        var next = await requestSearch(QUERY, page, PER_PAGE, signal);
+        if (next.total_count !== total) throw new Error("search totals changed during pagination");
+        items = items.concat(next.items);
+      }
+
+      if (items.length !== total) throw new Error("incomplete search results");
+      return countItems(items);
+    }
+
+    async function collectPerRepository(signal) {
+      var counts = {};
+      var keys = Object.keys(configured);
+
+      for (var i = 0; i < keys.length; i++) {
+        var key = keys[i];
+        var query = "repo:" + configured[key].fullName + " author:" + LOGIN + " is:pr is:merged";
+        var data = await requestSearch(query, 1, 1, signal);
+        counts[key] = data.total_count;
+      }
+
+      return counts;
+    }
+
+    function applyCounts(counts) {
+      var updates = [];
+
+      /* Validate every value before touching the DOM, so a bad result can
+         never leave the section partially refreshed. */
+      Object.keys(configured).forEach(function (key) {
+        var value = counts[key];
+        if (
+          !Object.prototype.hasOwnProperty.call(counts, key) ||
+          typeof value !== "number" ||
+          !isFinite(value) ||
+          value < 0 ||
+          Math.floor(value) !== value
+        ) {
+          throw new Error("unreliable count for " + key);
+        }
+        updates.push([configured[key], value]);
+      });
+
+      updates.forEach(function (update) {
+        var element = update[0].element;
+        var value = update[1];
+        element.textContent = String(value);
+        var label = element.parentNode && element.parentNode.querySelector("[data-merged-pr-noun]");
+        if (label) {
+          label.textContent = value === 1 ? "merged pull request" : "merged pull requests";
+        }
+      });
+    }
+
+    async function refresh() {
+      var controller = new AbortController();
+      var timer = setTimeout(function () { controller.abort(); }, TIMEOUT);
+
+      try {
+        var counts = await collectGlobal(controller.signal);
+        if (!counts) counts = await collectPerRepository(controller.signal);
+        applyCounts(counts);
+      } catch (error) {
+        console.info(
+          "[contributions] Live merged-PR counts unavailable; keeping build-time counts.",
+          error && error.message ? error.message : error
+        );
+      } finally {
+        clearTimeout(timer);
+      }
+    }
+
+    refresh();
+  }
+
   /* ----- Hero frame parallax (desktop, motion allowed) -----
      rAF-throttled; only touches a CSS variable → transform only. */
   var heroMedia = document.querySelector(".hero-media");
