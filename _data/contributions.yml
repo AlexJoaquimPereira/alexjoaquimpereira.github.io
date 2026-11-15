@@ -12,8 +12,8 @@
 #     filtered to that repository — not the number of PRs listed
 #     below (pull_requests is a curated subset for the homepage).
 #
-# Verification snapshot: 2026-11-14 — 61 merged PRs total, 53 upstream:
-#     storytold/craft-anything             45
+# Verification snapshot: 2026-11-15 — 64 merged PRs total, 56 upstream:
+#     storytold/craft-anything             48
 #     TeamConnectifyGec/ConnectiyFrontend   5
 #     afriemann/opencode-redact             1  (no licence file)
 #     JetBrains/swot                        1  (MIT — not shown)
@@ -46,9 +46,9 @@ repositories:
       Craft Anything: understand how any software works, and craft your own.
     url: "https://github.com/storytold/craft-anything"
     license: "Apache-2.0"
-    merged_pr_count: 45
+    merged_pr_count: 48
     prs_url: "https://github.com/storytold/craft-anything/pulls?q=is%3Apr+author%3AAlexJoaquimPereira+is%3Amerged"
-    verified_at: "2026-11-14"
+    verified_at: "2026-11-15"
     featured: true
     pull_requests:
       - number: 1796
@@ -92,7 +92,7 @@ repositories:
     license: "BSD-3-Clause"
     merged_pr_count: 5
     prs_url: "https://github.com/TeamConnectifyGec/ConnectiyFrontend/pulls?q=is%3Apr+author%3AAlexJoaquimPereira+is%3Amerged"
-    verified_at: "2026-11-14"
+    verified_at: "2026-11-15"
     pull_requests:
       - number: 7
         title: "Added functions in post page"
@@ -120,7 +120,7 @@ repositories:
     # verified open-source project.
     merged_pr_count: 1
     prs_url: "https://github.com/afriemann/opencode-redact/pulls?q=is%3Apr+author%3AAlexJoaquimPereira+is%3Amerged"
-    verified_at: "2026-11-14"
+    verified_at: "2026-11-15"
     pull_requests:
       - number: 24
         title: "Fix/tool error and contentpart redaction"
