@@ -12,8 +12,8 @@
 #     filtered to that repository — not the number of PRs listed
 #     below (pull_requests is a curated subset for the homepage).
 #
-# Verification snapshot: 2026-11-15 — 64 merged PRs total, 56 upstream:
-#     storytold/craft-anything             48
+# Verification snapshot: 2026-11-23 — 90 merged PRs total, 71 upstream:
+#     storytold/craft-anything             63
 #     TeamConnectifyGec/ConnectiyFrontend   5
 #     afriemann/opencode-redact             1  (no licence file)
 #     JetBrains/swot                        1  (MIT — not shown)
@@ -46,7 +46,7 @@ repositories:
       Craft Anything: understand how any software works, and craft your own.
     url: "https://github.com/storytold/craft-anything"
     license: "Apache-2.0"
-    merged_pr_count: 48
+    merged_pr_count: 63
     prs_url: "https://github.com/storytold/craft-anything/pulls?q=is%3Apr+author%3AAlexJoaquimPereira+is%3Amerged"
     verified_at: "2026-11-15"
     featured: true
